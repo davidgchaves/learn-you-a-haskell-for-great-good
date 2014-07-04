@@ -56,3 +56,14 @@ tell [x] = "The list has one element: " ++ show x
 tell [x,y] = "The list has two elements: " ++ show x ++ " and " ++ show y
 tell (x:y:_) = "The list is long. The first two elements are: " ++ show x ++ " and " ++ show y
 
+
+--
+-- Pattern matching and as-patterns
+--
+
+firstLetter :: String -> String
+firstLetter "" = "Empty string, whoops!"
+firstLetter all@(x:xs) = "The first letter of " ++ all ++ " is " ++ [x]
+-- all@(x:xs) is an example of an as-pattern
+-- you could use whatever name you like instead 'all', i.e. sentence@(x:xs)
+
