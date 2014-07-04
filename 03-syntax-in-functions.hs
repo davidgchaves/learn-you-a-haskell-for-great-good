@@ -106,3 +106,18 @@ bmiTell' weight height
           normal = 25.0
           fat = 30.0
 
+
+--
+-- Pattern Matching with where
+--
+
+initials :: String -> String -> String
+initials firstname lastname = [f] ++ ". " ++ [l] ++ "."
+    where (f:_) = firstname
+          (l:_) = lastname
+-- just an example of pattern matching with where,
+-- but pattern matching directly in the function's parameters
+-- seems a better choice:
+initials' :: String -> String -> String
+initials' (f:_) (l:_) = [f] ++ ". " ++ [l] ++ "."
+
