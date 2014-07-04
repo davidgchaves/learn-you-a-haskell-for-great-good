@@ -28,6 +28,7 @@ doubleTheInputAndFilter = [x*2 | x <- [1..10], x*2 >= 12] -- --> [12,14,16,18,20
 -- numbers from 50 to 100 whose remainder when divided by 7 is 3
 filterAccordingToRemainder = [x | x <- [50..100], x `mod` 7 == 3] -- --> [52,59,66,73,80,87,94]
 
+
 -- list comprehension that replaces every odd number less than 10 with "BOOM!"
 --                              and every odd number greater than 10 with "BANG!"
 boomBang xs = [if x < 10 then "BOOM!" else "BANG!" | x <- xs, odd x]
@@ -45,4 +46,20 @@ xxs = [[1,3,5,2,3,1,2,4,5],
        [1,2,3,4,5,6,7,8,9],
        [1,2,4,2,1,6,3,1,3,2,3,6]]
 nestedListComprehensionOperatingOnNestedLists = [ [x | x <- xs, even x] | xs <- xxs] -- --> [[2,2,4], [2,4,6,8], [2,4,2,6,2,6]]
+
+
+--
+-- tuples => Store several heterogeneous elements as a single value
+--
+
+aPair = (1, 3)
+aTriple = (3, 'a', "hello")
+aFourTuple = (50, 50.4, "hello", 'b')
+-- a pair, a triple, a 4-tuple, ... are DISTINCT types (i.e. a list CAN'T be composed of both pairs and triples)
+-- tuples that have the same length but have different types of data are DISTINCT types of tuples
+
+returnThe1stComponentOfATuple = fst (8, 11) -- --> 8
+returnThe2ndComponentOfATuple = snd (8, 11) -- --> 11
+
+returnAListOfPairs = zip [1..5] ["one", "two", "three", "four", "five"] -- --> [(1,"one"),(2,"two"),(3,"three"),(4,"four"),(5,"five")]
 
