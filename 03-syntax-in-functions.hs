@@ -38,3 +38,21 @@ second (_, y, _) = y
 third :: (a, b, c) -> c
 third (_, _, z) = z
 
+
+--
+-- Pattern Matching with lists and lists comprehensions
+--
+
+xs = [(1,3), (4,3), (2,4), (5,3), (5,6), (3,1)]
+patternMatchingInListComprehensions = [x+y | (x,y) <- xs]
+
+head' :: [a] -> a
+head' [] = error "Can't call head' on an empty list, dummy!"
+head' (x:_) = x
+
+tell :: (Show a) => [a] -> String
+tell [] = "The list is empty"
+tell [x] = "The list has one element: " ++ show x
+tell [x,y] = "The list has two elements: " ++ show x ++ " and " ++ show y
+tell (x:y:_) = "The list is long. The first two elements are: " ++ show x ++ " and " ++ show y
+
