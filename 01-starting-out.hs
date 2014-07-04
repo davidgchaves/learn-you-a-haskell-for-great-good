@@ -63,3 +63,22 @@ returnThe2ndComponentOfATuple = snd (8, 11) -- --> 11
 
 returnAListOfPairs = zip [1..5] ["one", "two", "three", "four", "five"] -- --> [(1,"one"),(2,"two"),(3,"three"),(4,"four"),(5,"five")]
 
+
+--
+-- Find the right triangle
+--
+
+-- find a right triangle that fits
+--   (1) the lengths of three sides are all integers
+--   (2) the length of each side is less than or equal to 10
+--   (3) the triangle's perimeter is 24
+
+-- Step 1: Generate all possible triples that satisfy (1) and (2)
+triples = [ (a,b,h) | a <- [1..10], b <- [1..10], h <- [1..10]] -- --> [(1,1,1), (1,1,2), (1,1,3), ..., (10,10,9), (10,10,10)]
+
+-- Step 2: Generate all possible right triangles that satisfy (1) and (2)
+rightTriangles = [ (a,b,h) | a <- [1..10], b <- [1..10], h <- [1..10], a^2 + b^2 == h^2] -- --> [(3,4,5), (4,3,5), (6,8,10), (8,6,10)]
+
+-- Step 3: Solution
+rightTrianglesSolution = [ (a,b,h) | a <- [1..10], b <- [1..10], h <- [1..10], a^2 + b^2 == h^2, a+b+h == 24] -- --> [(6,8,10), (8,6,10)]
+
