@@ -141,3 +141,10 @@ cylinder r h =
         topArea = pi * r ^ 2
     in  sideArea + 2 * topArea
 
+--
+-- Let in list comprehensions
+--
+
+calcBmis' :: [(Double, Double)] -> [Double]
+calcBmis' xs = [bmi | (w, h) <- xs, let bmi = w / h ^ 2]
+
