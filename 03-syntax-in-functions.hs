@@ -148,3 +148,18 @@ cylinder r h =
 calcBmis' :: [(Double, Double)] -> [Double]
 calcBmis' xs = [bmi | (w, h) <- xs, let bmi = w / h ^ 2]
 
+
+--
+-- Case expressions
+--
+
+head'' :: [a] -> a
+head'' xs = case xs of []    -> error "No head for empty lists!"
+                       (x:_) -> x
+-- Equivalent to head' (pattern matching with lists and list comprehensions)
+
+describeList :: [a] -> String
+describeList ls = "The list is " ++ case ls of []  -> "empty."
+                                               [x] -> "a singleton list."
+                                               xs  -> "a longer list."
+
