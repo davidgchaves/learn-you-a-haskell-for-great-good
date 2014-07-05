@@ -121,3 +121,12 @@ initials firstname lastname = [f] ++ ". " ++ [l] ++ "."
 initials' :: String -> String -> String
 initials' (f:_) (l:_) = [f] ++ ". " ++ [l] ++ "."
 
+
+--
+-- Functions in where blocks
+--
+
+calcBmis :: [(Double, Double)] -> [Double]
+calcBmis xs = [bmi w h | (w, h) <- xs]
+    where bmi weight height = weight / height ^ 2
+
