@@ -55,3 +55,13 @@ repeat' :: a -> [a]
 repeat' x = x : repeat' x
 -- nice example of how to use recursion with no base case to produce infinite lists
 
+
+--
+-- The recursive zip' function
+--
+
+zip' :: [a] -> [b] -> [(a,b)]
+zip' [] _          = []
+zip' _ []          = []
+zip' (x:xs) (y:ys) = (x,y) : zip' xs ys
+
