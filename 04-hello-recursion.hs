@@ -65,3 +65,20 @@ zip' [] _          = []
 zip' _ []          = []
 zip' (x:xs) (y:ys) = (x,y) : zip' xs ys
 
+
+--
+-- The recursive elem' function
+--
+
+-- my first attempt
+elem' :: (Eq a) => a -> [a] -> Bool
+elem' _ []     = False
+elem' e (x:xs) = e == x || elem' e xs
+
+-- suggested solution mixing pattern matching and guards
+elem'' :: (Eq a) => a -> [a] -> Bool
+elem'' _ [] = False
+elem'' e (x:xs)
+    | e == x = True
+    | otherwise = e `elem` xs
+
