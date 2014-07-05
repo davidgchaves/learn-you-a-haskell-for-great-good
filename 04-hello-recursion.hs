@@ -27,3 +27,13 @@ replicate'' n x
     | otherwise = x : replicate'' (n-1) x
 -- and there's a good reason: Protecting against n being negative
 
+
+--
+-- The recursive take' function
+--
+
+take' :: (Num i, Ord i) => i -> [a] -> [a]
+take' n _ | n <= 0 = []
+take' _ []         = []
+take' n (x:xs)     = x : take' (n-1) xs
+
