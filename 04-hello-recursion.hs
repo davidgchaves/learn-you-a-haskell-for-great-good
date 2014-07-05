@@ -82,3 +82,15 @@ elem'' e (x:xs)
     | e == x = True
     | otherwise = e `elem` xs
 
+
+--
+-- The recursive quicksort algorithm function
+--
+
+quicksort :: (Ord a) => [a] -> [a]
+quicksort [] = []
+quicksort (x:xs) =
+    let smallerOrEqual = [a | a <- xs, a <= x]
+        larger         = [a | a <- xs, a > x]
+    in  quicksort smallerOrEqual ++ [x] ++ quicksort larger
+
