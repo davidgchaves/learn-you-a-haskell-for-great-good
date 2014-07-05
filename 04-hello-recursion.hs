@@ -46,3 +46,12 @@ reverse' :: [a] -> [a]
 reverse' [] = []
 reverse' (x:xs) = reverse' xs ++ [x]
 
+
+--
+-- The recursive repeat' function
+--
+
+repeat' :: a -> [a]
+repeat' x = x : repeat' x
+-- nice example of how to use recursion with no base case to produce infinite lists
+
