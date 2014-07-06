@@ -78,3 +78,21 @@ zipWith' _ _ []          = []
 zipWith' f (x:xs) (y:ys) = f x y : zipWith' f xs ys
 -- zipWith' (*) [10, 100, 1000] [4, 5, 6] --> [40, 500, 6000]
 
+
+--
+-- Implementing flip' (... and my head exploded)
+--
+
+-- f takes two args (a and b) and returns one value (c)
+-- g takes two args (b and a) and returns one value (c)
+-- flip' takes the function f and returns the function g
+flip' :: (a -> b -> c) -> (b -> a -> c)
+flip' f = g
+    where g x y = f y x
+
+flip'' :: (a -> b -> c) -> b -> a -> c
+flip'' f y x = f x y
+
+flip''' :: (a -> b -> c) -> b -> a -> c
+flip''' f x y = f y x
+
