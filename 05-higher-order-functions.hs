@@ -66,3 +66,15 @@ cons3 :: [Int] -> [Int]
 cons3 = (3 :)
 -- applyTwice cons3 [1] --> [3, 3, 1]
 
+
+--
+-- Implementing zipWith'
+--
+
+-- f takes two args (a and b) and returns one value (c)
+zipWith' :: (a -> b -> c) -> [a] -> [b] -> [c]
+zipWith' _ [] _          = []
+zipWith' _ _ []          = []
+zipWith' f (x:xs) (y:ys) = f x y : zipWith' f xs ys
+-- zipWith' (*) [10, 100, 1000] [4, 5, 6] --> [40, 500, 6000]
+
