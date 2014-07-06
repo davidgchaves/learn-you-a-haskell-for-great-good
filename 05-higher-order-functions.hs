@@ -1,5 +1,6 @@
 -- Higher-order functions
 
+
 --
 -- Curried and partially applied functions
 --
@@ -39,4 +40,29 @@ isUpperAlphanum :: Char -> Bool
 isUpperAlphanum = (`elem` ['A'..'Z'])
 -- isUpperAlphanum 'g' --> False
 -- isUpperAlphanum 'G' --> False
+
+
+--
+-- Higher-order function's examples
+--
+
+applyTwice :: (a -> a) -> a -> a
+applyTwice f x = f (f x)
+-- we need the (a -> a) because -> is naturally right-associative
+
+sum3 :: Int -> Int
+sum3 = (+ 3)
+-- applyTwice sum3 10 -> 16
+
+postHaHa :: String -> String
+postHaHa = (++ " HAHA")
+-- applyTwice postHaHa "HEY" --> "HEY HAHA HAHA"
+
+preHaHa :: String -> String
+preHaHa = ("HAHA " ++)
+-- applyTwice preHaHa "HEY" --> "HAHA HAHA HEY"
+
+cons3 :: [Int] -> [Int]
+cons3 = (3 :)
+-- applyTwice cons3 [1] --> [3, 3, 1]
 
