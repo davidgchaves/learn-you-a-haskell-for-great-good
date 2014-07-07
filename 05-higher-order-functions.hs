@@ -243,3 +243,19 @@ quicksortWithListComprehensions (x:xs) =
 -- quicksortWithListComprehensions "the quick brown fox jumps over the lazy dog"
 --                                 --> "        abcdeeefghhijklmnoooopqrrsttuuvwxyz"
 
+
+--
+-- More examples of map and filter
+--
+
+largestDivisibleUnder100000 :: Integer -> Integer
+largestDivisibleUnder100000 x = head (filter pred [100000, 99999..])
+    where pred y = y `mod` x == 0
+-- largestDivisibleUnder100000 3829 --> 99554
+
+largestDivisibleUnder100000' :: Integer -> Integer
+largestDivisibleUnder100000' x =
+    let pred y = y `mod` x == 0
+    in  head (filter pred [100000, 99999..])
+-- largestDivisibleUnder100000' 3829 --> 99554
+
