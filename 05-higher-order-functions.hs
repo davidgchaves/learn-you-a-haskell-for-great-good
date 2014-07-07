@@ -180,3 +180,12 @@ greaterThan3WithListComprehensions :: [Int] -> [Int]
 greaterThan3WithListComprehensions xs = [x | x <- xs, x > 3]
 -- greaterThan3WithListComprehensions [1,2,3,4,5] --> [4,5]
 
+
+onlyEvenWithFilter :: [Int] -> [Int]
+onlyEvenWithFilter = filter even
+-- onlyEvenWithFilter [1..10] --> [2,4,6,8,10]
+
+onlyEvenWithListComprehensions :: [Int] -> [Int]
+onlyEvenWithListComprehensions xs = [x | x <- xs, even x]
+-- onlyEvenWithListComprehensions [1..10] --> [2,4,6,8,10]
+
