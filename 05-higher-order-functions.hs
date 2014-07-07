@@ -189,3 +189,20 @@ onlyEvenWithListComprehensions :: [Int] -> [Int]
 onlyEvenWithListComprehensions xs = [x | x <- xs, even x]
 -- onlyEvenWithListComprehensions [1..10] --> [2,4,6,8,10]
 
+
+notNullWithFilter :: [[a]] -> [[a]]
+notNullWithFilter = let notNull x = not (null x) in filter notNull
+-- A bit convoluted.
+-- I think this time explicitly requiring xs as an arg helps readability
+
+notNullWithFilter' :: [[a]] -> [[a]]
+notNullWithFilter' xs = let notNull x = not (null x) in filter notNull xs
+-- I think this reads better. Not guessing about partially applying filter.
+
+-- notNullWithFilter  [[1,2,3], [], [4], [5,6], [], [], []] --> [[1,2,3],[4],[5,6]]
+-- notNullWithFilter' [[1,2,3], [], [4], [5,6], [], [], []] --> [[1,2,3],[4],[5,6]]
+
+notNullWithListComprehensions :: [[a]] -> [[a]]
+notNullWithListComprehensions xs = [x | x <- xs, let notNull x = not (null x), notNull x]
+-- notNullWithListComprehensions [[1,2,3], [], [4], [5,6], [], [], []] --> [[1,2,3],[4],[5,6]]
+
