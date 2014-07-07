@@ -224,3 +224,22 @@ lessThan15AndEvenWithListComprehensions :: Integral a => [a] -> [a]
 lessThan15AndEvenWithListComprehensions xs = [x | x <- xs, x < 15, even x]
 -- lessThan15AndEvenWithListComprehensions [1..20] --> [2,4,6,8,10,12,14]
 
+
+quicksortWithFilter :: (Ord a) => [a] -> [a]
+quicksortWithFilter [] = []
+quicksortWithFilter (x:xs) =
+    let smallerOrEqual = filter (<= x) xs
+        larger         = filter (> x) xs
+    in  quicksortWithFilter smallerOrEqual ++ [x] ++ quicksortWithFilter larger
+-- quicksortWithFilter "the quick brown fox jumps over the lazy dog"
+--                     --> "        abcdeeefghhijklmnoooopqrrsttuuvwxyz"
+
+quicksortWithListComprehensions :: (Ord a) => [a] -> [a]
+quicksortWithListComprehensions [] = []
+quicksortWithListComprehensions (x:xs) =
+    let smallerOrEqual = [e | e <- xs, e <= x]
+        larger         = [e | e <- xs, e > x]
+    in  quicksortWithListComprehensions smallerOrEqual ++ [x] ++ quicksortWithListComprehensions larger
+-- quicksortWithListComprehensions "the quick brown fox jumps over the lazy dog"
+--                                 --> "        abcdeeefghhijklmnoooopqrrsttuuvwxyz"
+
