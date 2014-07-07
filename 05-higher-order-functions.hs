@@ -326,3 +326,12 @@ mapr :: (a -> b) -> [a] -> [b]
 mapr f xs = foldr (\x acc -> f x : acc) [] xs
 -- fast because of :
 
+
+--
+-- using foldl to implement map
+--
+
+mapl :: (a -> b) -> [a] -> [b]
+mapl f xs = foldl (\acc x -> acc ++ [f x]) [] xs
+-- slow because of ++
+
