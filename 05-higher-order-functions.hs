@@ -105,3 +105,16 @@ map' :: (a -> b) -> [a] -> [b]
 map' _ []      = []
 map' f (x:xs) = f x : map' f xs
 
+
+--
+-- map vs list comprehensions
+--
+
+plus3WithMap :: [Int] -> [Int]
+plus3WithMap = map (+ 3)
+-- plus3WithMap [1,2,3,4,5,6,7,8,9] --> [4,5,6,7,8,9,10,11,12]
+
+plus3WithListComprehensions :: [Int] -> [Int]
+plus3WithListComprehensions xs = [x + 3 | x <- xs]
+-- plus3WithListComprehensions [1,2,3,4,5,6,7,8,9] --> [4,5,6,7,8,9,10,11,12]
+
