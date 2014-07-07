@@ -296,3 +296,18 @@ countLongCollatzChains :: Int
 countLongCollatzChains = length filterCollatzChainsLongerThan15
 -- countLongCollatzChains --> 66
 
+
+--
+-- Fold
+--
+
+sum' :: (Num a) => [a] -> a
+sum' xs = foldl (\acc x -> acc + x) 0 xs
+-- the binary function (lambda) in a foldl takes,
+-- first the acc and second the current list value
+
+sum'' :: (Num a) => [a] -> a
+sum'' = foldl (+) 0
+-- we can omit the xs parameter because foldl (+) 0
+-- will return a function that takes a list (because of currying)
+
