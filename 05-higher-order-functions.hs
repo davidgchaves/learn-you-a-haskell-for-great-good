@@ -145,3 +145,12 @@ mapSquareWithListComprehensions :: (Num a) => [[a]] -> [[a]]
 mapSquareWithListComprehensions xs = [map (^ 2) x | x <- xs]
 -- mapSquareWithListComprehensions [[1,2,3], [10,20,30]] --> [[1,4,9],[100,400,900]]
 
+
+firstWithMap :: [(a,b)] -> [a]
+firstWithMap = map fst
+-- firstWithMap [(1,"What"), (2,"Where"), (3,"Who")] --> [1,2,3]
+
+firstWithListComprehensions :: [(a,b)] -> [a]
+firstWithListComprehensions xs = [fst x | x <- xs]
+-- firstWithListComprehensions [(1,"What"), (2,"Where"), (3,"Who")] --> [1,2,3]
+
