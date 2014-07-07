@@ -215,3 +215,12 @@ capitalLettersOnlyWithListComprehensions :: String -> String
 capitalLettersOnlyWithListComprehensions xs = [x | x <- xs, x `elem` ['A'..'Z']]
 -- capitalLettersOnlyWithListComprehensions "i LAuGh at you bEcause u R all the same" --> "LAGER"
 
+
+lessThan15AndEvenWithFilter :: Integral a => [a] -> [a]
+lessThan15AndEvenWithFilter xs = filter (< 15) (filter even xs)
+-- lessThan15AndEvenWithFilter [1..20] --> [2,4,6,8,10,12,14]
+
+lessThan15AndEvenWithListComprehensions :: Integral a => [a] -> [a]
+lessThan15AndEvenWithListComprehensions xs = [x | x <- xs, x < 15, even x]
+-- lessThan15AndEvenWithListComprehensions [1..20] --> [2,4,6,8,10,12,14]
+
