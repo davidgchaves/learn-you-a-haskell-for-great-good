@@ -259,3 +259,22 @@ largestDivisibleUnder100000' x =
     in  head (filter pred [100000, 99999..])
 -- largestDivisibleUnder100000' 3829 --> 99554
 
+
+sumOddSquaresUnder :: Integer -> Integer
+sumOddSquaresUnder num = sum (takeWhile (< num) (filter odd (map (^ 2) [1..])))
+-- sumOddSquaresUnder 10000 --> 166650
+
+produceSquares :: [Integer]
+produceSquares = map (^ 2) [1..]
+
+filterOddSquares :: [Integer]
+filterOddSquares = filter odd produceSquares
+
+oddSquaresUnder :: Integer -> [Integer]
+oddSquaresUnder num = takeWhile (< num) filterOddSquares
+
+sumOddSquaresUnder' :: Integer -> Integer
+sumOddSquaresUnder' num = sum (oddSquaresUnder num)
+-- sumOddSquaresUnder' 10000 --> 166650
+-- I like the 2nd implementation the better
+
