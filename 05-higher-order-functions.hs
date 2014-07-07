@@ -311,3 +311,9 @@ sum'' = foldl (+) 0
 -- we can omit the xs parameter because foldl (+) 0
 -- will return a function that takes a list (because of currying)
 
+
+elem' :: (Eq a) => a -> [a] -> Bool
+elem' y ys = foldr (\x acc -> if x == y then True else acc) False ys
+-- the binary function (lambda) in foldr takes,
+-- first the current list value and second the acc
+
