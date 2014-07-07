@@ -278,3 +278,21 @@ sumOddSquaresUnder' num = sum (oddSquaresUnder num)
 -- sumOddSquaresUnder' 10000 --> 166650
 -- I like the 2nd implementation the better
 
+
+produceCollatzChain :: Integer -> [Integer]
+produceCollatzChain 1 = [1]
+produceCollatzChain n
+    | even n = n : produceCollatzChain (n `div` 2)
+    | odd n  = n : produceCollatzChain (n * 3 + 1)
+
+produceFirst100CollatzChains :: [[Integer]]
+produceFirst100CollatzChains = map produceCollatzChain [1..100]
+
+filterCollatzChainsLongerThan15 :: [[Integer]]
+filterCollatzChainsLongerThan15 = filter isLong produceFirst100CollatzChains
+    where isLong xs = length xs > 15
+
+countLongCollatzChains :: Int
+countLongCollatzChains = length filterCollatzChainsLongerThan15
+-- countLongCollatzChains --> 66
+
