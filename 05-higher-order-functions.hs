@@ -167,3 +167,16 @@ filter' p (x:xs)
     | p x       = x : filter' p xs
     | otherwise = filter' p xs
 
+
+--
+-- filter vs list comprehensions with predicates
+--
+
+greaterThan3WithFilter :: [Int] -> [Int]
+greaterThan3WithFilter = filter (> 3)
+-- greaterThan3WithFilter [1,2,3,4,5] --> [4,5]
+
+greaterThan3WithListComprehensions :: [Int] -> [Int]
+greaterThan3WithListComprehensions xs = [x | x <- xs, x > 3]
+-- greaterThan3WithListComprehensions [1,2,3,4,5] --> [4,5]
+
