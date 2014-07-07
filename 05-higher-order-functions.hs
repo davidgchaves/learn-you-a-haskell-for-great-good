@@ -206,3 +206,12 @@ notNullWithListComprehensions :: [[a]] -> [[a]]
 notNullWithListComprehensions xs = [x | x <- xs, let notNull x = not (null x), notNull x]
 -- notNullWithListComprehensions [[1,2,3], [], [4], [5,6], [], [], []] --> [[1,2,3],[4],[5,6]]
 
+
+capitalLettersOnlyWithFilter :: String -> String
+capitalLettersOnlyWithFilter = filter (`elem` ['A'..'Z'])
+-- capitalLettersOnlyWithFilter "i LAuGh at you bEcause u R all the same" --> "LAGER"
+
+capitalLettersOnlyWithListComprehensions :: String -> String
+capitalLettersOnlyWithListComprehensions xs = [x | x <- xs, x `elem` ['A'..'Z']]
+-- capitalLettersOnlyWithListComprehensions "i LAuGh at you bEcause u R all the same" --> "LAGER"
+
