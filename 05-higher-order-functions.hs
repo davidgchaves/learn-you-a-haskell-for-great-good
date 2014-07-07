@@ -154,3 +154,16 @@ firstWithListComprehensions :: [(a,b)] -> [a]
 firstWithListComprehensions xs = [fst x | x <- xs]
 -- firstWithListComprehensions [(1,"What"), (2,"Where"), (3,"Who")] --> [1,2,3]
 
+
+--
+-- The filter' function
+--
+
+-- takes a predicate function (a -> Bool) and a list [a]
+-- produces a list [a] with the elements that satisfy the predicate
+filter' :: (a -> Bool) -> [a] -> [a]
+filter' _ [] = []
+filter' p (x:xs)
+    | p x       = x : filter' p xs
+    | otherwise = filter' p xs
+
