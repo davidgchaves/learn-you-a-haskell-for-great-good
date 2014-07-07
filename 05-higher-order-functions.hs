@@ -127,3 +127,12 @@ bangWithListComprehensions :: [String] -> [String]
 bangWithListComprehensions xs = [x ++ "!" | x <- xs]
 -- bangWithListComprehensions ["ha", "he", "hi"] --> ["ha!","he!","hi!"]
 
+
+replicate3WithMap :: [a] -> [[a]]
+replicate3WithMap = map (replicate 3)
+-- replicate3WithMap ["Hello", "World"] --> [["Hello","Hello","Hello"],["World","World","World"]]
+
+replicate3WithListComprehensions :: [a] -> [[a]]
+replicate3WithListComprehensions xs = [replicate 3 x | x <- xs]
+-- replicate3WithListComprehensions ["Hello", "World"] --> [["Hello","Hello","Hello"],["World","World","World"]]
+
