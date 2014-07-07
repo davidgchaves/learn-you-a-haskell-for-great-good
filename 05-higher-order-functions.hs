@@ -118,3 +118,12 @@ plus3WithListComprehensions :: [Int] -> [Int]
 plus3WithListComprehensions xs = [x + 3 | x <- xs]
 -- plus3WithListComprehensions [1,2,3,4,5,6,7,8,9] --> [4,5,6,7,8,9,10,11,12]
 
+
+bangWithMap :: [String] -> [String]
+bangWithMap = map (++ "!")
+-- bangWithMap ["ha", "he", "hi"] --> ["ha!","he!","hi!"]
+
+bangWithListComprehensions :: [String] -> [String]
+bangWithListComprehensions xs = [x ++ "!" | x <- xs]
+-- bangWithListComprehensions ["ha", "he", "hi"] --> ["ha!","he!","hi!"]
+
