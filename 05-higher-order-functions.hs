@@ -317,3 +317,12 @@ elem' y ys = foldr (\x acc -> if x == y then True else acc) False ys
 -- the binary function (lambda) in foldr takes,
 -- first the current list value and second the acc
 
+
+--
+-- using foldr to implement map
+--
+
+mapr :: (a -> b) -> [a] -> [b]
+mapr f xs = foldr (\x acc -> f x : acc) [] xs
+-- fast because of :
+
