@@ -96,3 +96,12 @@ flip'' f y x = f x y
 flip''' :: (a -> b -> c) -> b -> a -> c
 flip''' f x y = f y x
 
+
+--
+-- The map' function
+--
+
+map' :: (a -> b) -> [a] -> [b]
+map' _ []      = []
+map' f (x:xs) = f x : map' f xs
+
