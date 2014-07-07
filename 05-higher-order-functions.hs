@@ -136,3 +136,12 @@ replicate3WithListComprehensions :: [a] -> [[a]]
 replicate3WithListComprehensions xs = [replicate 3 x | x <- xs]
 -- replicate3WithListComprehensions ["Hello", "World"] --> [["Hello","Hello","Hello"],["World","World","World"]]
 
+
+mapSquareWithMap :: (Num a) => [[a]] -> [[a]]
+mapSquareWithMap = map (map (^ 2))
+-- mapSquareWithMap [[1,2,3], [10,20,30]] --> [[1,4,9],[100,400,900]]
+
+mapSquareWithListComprehensions :: (Num a) => [[a]] -> [[a]]
+mapSquareWithListComprehensions xs = [map (^ 2) x | x <- xs]
+-- mapSquareWithListComprehensions [[1,2,3], [10,20,30]] --> [[1,4,9],[100,400,900]]
+
