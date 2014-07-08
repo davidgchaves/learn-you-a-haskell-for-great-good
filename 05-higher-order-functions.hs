@@ -335,3 +335,14 @@ mapl :: (a -> b) -> [a] -> [b]
 mapl f xs = foldl (\acc x -> acc ++ [f x]) [] xs
 -- slow because of ++
 
+
+--
+-- using foldl to implement reverse
+--
+
+reverse' :: [a] -> [a]
+reverse' = foldl (\acc x -> x : acc) []
+
+reverse'' :: [a] -> [a]
+reverse'' = foldl (flip (:)) []
+
