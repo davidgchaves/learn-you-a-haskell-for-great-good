@@ -383,3 +383,21 @@ and' = foldr (&&) True
 -- and' (repeat False)           --> False
 -- and' (take 100 (repeat True)) --> True
 
+
+--
+-- Function composition
+--
+
+
+--
+-- lambda vs function composition: turnIntoNegative
+--
+
+turnIntoNegative :: [Integer] -> [Integer]
+turnIntoNegative = map (\x -> negate (abs x))
+-- turnIntoNegative [(-4)..3] --> [-4,-3,-2,-1,0,-1,-2,-3]
+
+turnIntoNegative' :: [Integer] -> [Integer]
+turnIntoNegative' = map (negate . abs)
+-- turnIntoNegative' [(-4)..3] --> [-4,-3,-2,-1,0,-1,-2,-3]
+
