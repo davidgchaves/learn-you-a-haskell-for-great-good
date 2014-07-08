@@ -371,3 +371,15 @@ last' :: [a] -> a
 last' = foldl1 (\_ x -> x)
 --the last element will be returned by the lambda once the list is fully traversed
 
+
+--
+-- using foldr on infinite lists: and
+--
+
+-- foldr will work on infinite lists when the binary function that we're passing to it
+-- doesn't always need to evaluate its second parameter to give us some sort of answer
+and' :: [Bool] -> Bool
+and' = foldr (&&) True
+-- and' (repeat False)           --> False
+-- and' (take 100 (repeat True)) --> True
+
