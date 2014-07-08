@@ -401,3 +401,16 @@ turnIntoNegative' :: [Integer] -> [Integer]
 turnIntoNegative' = map (negate . abs)
 -- turnIntoNegative' [(-4)..3] --> [-4,-3,-2,-1,0,-1,-2,-3]
 
+
+--
+-- lambda vs function composition: negateTheSumOfTheTails
+--
+
+negateTheSumOfTheTails :: [[Integer]] -> [Integer]
+negateTheSumOfTheTails = map (\xs -> negate(sum(tail xs)))
+-- negateTheSumOfTheTails [[1..5], [3..6], [1..7]] --> [-14,-15,-27]
+
+negateTheSumOfTheTails' :: [[Integer]] -> [Integer]
+negateTheSumOfTheTails' = map (negate . sum . tail)
+-- negateTheSumOfTheTails' [[1..5], [3..6], [1..7]] --> [-14,-15,-27]
+
