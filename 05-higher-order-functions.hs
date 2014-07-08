@@ -362,3 +362,12 @@ product' = foldl (*) 1
 filter'' :: (a -> Bool) -> [a] -> [a]
 filter'' pred = foldr (\x acc -> if pred x then x : acc else acc) []
 
+
+--
+-- using foldl1 to implement last
+--
+
+last' :: [a] -> a
+last' = foldl1 (\_ x -> x)
+--the last element will be returned by the lambda once the list is fully traversed
+
