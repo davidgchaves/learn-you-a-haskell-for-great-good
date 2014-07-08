@@ -354,3 +354,11 @@ reverse'' = foldl (flip (:)) []
 product' :: (Num a) => [a] -> a
 product' = foldl (*) 1
 
+
+--
+-- using foldr to implement filter
+--
+
+filter'' :: (a -> Bool) -> [a] -> [a]
+filter'' pred = foldr (\x acc -> if pred x then x : acc else acc) []
+
