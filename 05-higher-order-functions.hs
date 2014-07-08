@@ -414,3 +414,16 @@ negateTheSumOfTheTails' :: [[Integer]] -> [Integer]
 negateTheSumOfTheTails' = map (negate . sum . tail)
 -- negateTheSumOfTheTails' [[1..5], [3..6], [1..7]] --> [-14,-15,-27]
 
+
+--
+-- point-free style example
+--
+
+fn :: (Floating a, Integral b, RealFrac a) => a -> b
+fn x = ceiling (negate (tan (cos (max 50 x))))
+-- fn 180 --> 1
+
+pointFreeStyleFn :: (Floating a, Integral b, RealFrac a) => a -> b
+pointFreeStyleFn = ceiling . negate . tan . cos . max 50
+-- pointFreeStyleFn 180 --> 1
+
