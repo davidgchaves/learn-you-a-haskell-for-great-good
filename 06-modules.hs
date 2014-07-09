@@ -123,3 +123,11 @@ newBook = Map.insert "grace" "341-9021" phoneBook'
 -- Map.size phoneBook'        --> 6
 -- Map.size newBook           --> 7
 
+
+phonesToDigits :: String -> [Int]
+phonesToDigits = map digitToInt . filter isDigit
+-- phonesToDigits "948-4435" --> [9,4,8,4,4,3,5]
+
+intBook = Map.map phonesToDigits phoneBook'
+-- Map.lookup "betty" intBook --> Just [5,5,5,2,9,3,8]
+
