@@ -64,7 +64,7 @@ sumDigits :: Int -> Int
 sumDigits = sum . map digitToInt . show
 -- sumDigits 2345 --> 14
 
-firstToSum Int -> Maybe Int
+firstToSum :: Int -> Maybe Int
 firstToSum n = find (\x -> sumDigits x == n) [1..]
 -- firstToSum 40 --> Just 49999
 
