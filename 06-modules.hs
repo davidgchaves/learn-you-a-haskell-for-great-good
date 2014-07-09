@@ -68,3 +68,37 @@ firstToSum :: Int -> Maybe Int
 firstToSum n = find (\x -> sumDigits x == n) [1..]
 -- firstToSum 40 --> Just 49999
 
+
+--
+-- Mapping keys to values
+--
+
+phoneBook =
+    [("betty", "555-2938")
+    ,("bonnie", "452-2928")
+    ,("patsy", "493-2928")
+    ,("lucille", "205-2928")
+    ,("wendy", "939-8282")
+    ,("penny", "853-2492")
+    ]
+
+findKey :: (Eq k) => k -> [(k,v)] -> v
+findKey key xs = snd . head . filter (\(k,v) -> k == key) $ xs
+-- findKey "penny" phoneBook --> "853-2492"
+-- findKey "mark" phoneBook  --> "*** Exception: Prelude.head: empty list
+
+-- findKey' returning a Maybe data type to avoid exception
+findKey' :: (Eq k) => k -> [(k,v)] -> Maybe v
+findKey' key [] = Nothing
+findKey' key ((k,v):xs)
+    | key == k  = Just v
+    | otherwise = findKey' key xs
+-- findKey' "penny" phoneBook --> Just "853-2492"
+-- findKey' "mark" phoneBook  --> Nothing
+
+-- findKey'' using a foldr rather than explicitly writing the recursion
+findKey'' :: (Eq k) => k -> [(k,v)] -> Maybe v
+findKey'' key xs = foldr (\(k,v) acc -> if k == key then Just v else acc) Nothing xs
+-- findKey'' "penny" phoneBook --> Just "853-2492"
+-- findKey'' "mark" phoneBook  --> Nothing
+
