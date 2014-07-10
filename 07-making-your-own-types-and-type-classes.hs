@@ -27,3 +27,8 @@ nudge (Rectangle (Point x1 y1) (Point x2 y2)) xshift yshift
 -- nudge (Circle (Point 34 34) 10) 10 20               --> Circle (Point 44.0 54.0) 10.0
 -- nudge (Rectangle (Point 10 10) (Point 20 20)) 15 25 --> Rectangle (Point 25.0 35.0) (Point 35.0 45.0)
 
+
+baseCircle :: Float -> Shape
+baseCircle r = Circle (Point 0 0) r
+--  nudge (baseCircle 10) 30 40 -->  Circle (Point 30.0 40.0) 10.0
+
