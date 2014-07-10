@@ -37,3 +37,19 @@ baseRectangle :: Float -> Float -> Shape
 baseRectangle width height = Rectangle (Point 0 0) (Point width height)
 -- nudge (baseRectangle 40 100) 60 23 --> Rectangle (Point 60.0 23.0) (Point 100.0 123.0)
 
+
+--
+-- The custom Person type using Record Syntax
+--
+
+data Person = Person { firstName :: String
+                     , lastName :: String
+                     , age :: Int
+                     , height :: Float
+                     , phoneNumber :: String
+                     , flavor :: String } deriving (Show)
+-- :t flavor    --> flavor :: Person -> String
+-- :t firstName --> firstName :: Person -> String
+-- Person {firstName = "Buddy", lastName = "Finklestein", phoneNumber = "444-123456", flavor = "Chocolate", age = 43, height = 1.84 }
+--  --> Person {firstName = "Buddy", lastName = "Finklestein", age = 43, height = 1.84, phoneNumber = "444-123456", flavor = "Chocolate"}
+
