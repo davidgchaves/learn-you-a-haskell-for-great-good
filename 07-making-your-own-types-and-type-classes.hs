@@ -5,6 +5,7 @@
 --
 
 data Shape = Circle Float Float Float | Rectangle Float Float Float Float
+    deriving (Show)
 -- :t Circle    --> Circle :: Float -> Float -> Float -> Shape
 -- :t Rectangle --> Rectangle :: Float -> Float -> Float -> Float -> Shape
 
