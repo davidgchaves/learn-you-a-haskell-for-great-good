@@ -32,3 +32,8 @@ baseCircle :: Float -> Shape
 baseCircle r = Circle (Point 0 0) r
 --  nudge (baseCircle 10) 30 40 -->  Circle (Point 30.0 40.0) 10.0
 
+
+baseRectangle :: Float -> Float -> Shape
+baseRectangle width height = Rectangle (Point 0 0) (Point width height)
+-- nudge (baseRectangle 40 100) 60 23 --> Rectangle (Point 60.0 23.0) (Point 100.0 123.0)
+
