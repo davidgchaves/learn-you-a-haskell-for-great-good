@@ -62,3 +62,19 @@ data IntMaybe = INothing | IJust Int deriving (Show)
 data StrMaybe = SNothing | SJust String deriving (Show)
 data ShaMaybe = ShNothing | ShJust Shape deriving (Show)
 
+
+--
+-- To use or not to use Type Parameters
+--
+
+-- A Car with no Type Parameters
+data Car = Car { company :: String
+               , model :: String
+               , year :: Int
+               } deriving (Show)
+
+showCar :: Car -> String
+showCar (Car { company = c, model = m, year = y }) =
+    "This " ++ c ++ " " ++ m ++ " was made in " ++ show y
+-- showCar Car { company = "Ford", model = "Mustang", year = 1967 } --> "This Ford Mustang was made in 1967"
+
