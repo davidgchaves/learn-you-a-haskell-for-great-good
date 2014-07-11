@@ -78,3 +78,18 @@ showCar (Car { company = c, model = m, year = y }) =
     "This " ++ c ++ " " ++ m ++ " was made in " ++ show y
 -- showCar Car { company = "Ford", model = "Mustang", year = 1967 } --> "This Ford Mustang was made in 1967"
 
+
+-- A Car with Type Parameters
+data Car' a b c = Car' { company' :: a
+                       , model' :: b
+                       , year' :: c
+                       } deriving (Show)
+
+showCar' :: (Show a) => Car' String String a -> String
+showCar' (Car' { company' = c, model' = m, year' = y }) =
+    "This " ++ c ++ " " ++ m ++ " was made in " ++ show y
+-- showCar' $ Car' "Ford" "Mustang" 1967 --> "This Ford Mustang was made in 1967"
+
+-- The Type Signature of showCar' is more convoluted that the one of showCar,
+-- so maybe the Car type shouldn't be parameterized
+
