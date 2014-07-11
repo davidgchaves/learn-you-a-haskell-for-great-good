@@ -53,3 +53,12 @@ data Person = Person { firstName :: String
 -- Person {firstName = "Buddy", lastName = "Finklestein", phoneNumber = "444-123456", flavor = "Chocolate", age = 43, height = 1.84 }
 --  --> Person {firstName = "Buddy", lastName = "Finklestein", age = 43, height = 1.84, phoneNumber = "444-123456", flavor = "Chocolate"}
 
+
+--
+-- Playing with Type Parameters
+--
+
+data IntMaybe = INothing | IJust Int deriving (Show)
+data StrMaybe = SNothing | SJust String deriving (Show)
+data ShaMaybe = ShNothing | ShJust Shape deriving (Show)
+
