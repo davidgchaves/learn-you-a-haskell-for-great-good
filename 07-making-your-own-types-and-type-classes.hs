@@ -93,3 +93,22 @@ showCar' (Car' { company' = c, model' = m, year' = y }) =
 -- The Type Signature of showCar' is more convoluted that the one of showCar,
 -- so maybe the Car type shouldn't be parameterized
 
+
+--
+-- A 3D Vector Type
+--
+
+data Vector a = Vector a a a deriving (Show)
+
+vplus :: (Num a) => Vector a -> Vector a -> Vector a
+(Vector i j k) `vplus` (Vector l m n) = Vector (i+l) (j+m) (k+n)
+-- (Vector 1 1 1) `vplus` (Vector 5 6 7) --> Vector 6 7 8
+
+dotProd :: (Num a) => Vector a -> Vector a -> a
+(Vector i j k) `dotProd` (Vector l m n) = i*l + j*m + k*n
+-- (Vector 1 1 1) `dotProd` (Vector 5 6 7) --> 18
+
+vmult :: (Num a) => Vector a -> a -> Vector a
+(Vector i j k) `vmult` m = Vector (i*m) (j*m) (k*m)
+-- (Vector 5 6 7) `vmult` 10 --> Vector 50 60 70
+
