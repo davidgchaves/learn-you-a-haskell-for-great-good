@@ -112,3 +112,15 @@ vmult :: (Num a) => Vector a -> a -> Vector a
 (Vector i j k) `vmult` m = Vector (i*m) (j*m) (k*m)
 -- (Vector 5 6 7) `vmult` 10 --> Vector 50 60 70
 
+
+--
+-- PhoneBook with Type Synonyms
+--
+
+type PhoneNumber = String
+type Name = String
+type PhoneBook = [(Name, PhoneNumber)]
+
+inPhoneBook :: Name -> PhoneNumber -> PhoneBook -> Bool
+inPhoneBook name pnumber pbook = (name, pnumber) `elem` pbook
+
