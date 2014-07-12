@@ -1,5 +1,7 @@
 -- Making your own types and type classes
 
+import qualified Data.Map as Map
+
 --
 -- The custom Shape type
 --
@@ -123,4 +125,44 @@ type PhoneBook = [(Name, PhoneNumber)]
 
 inPhoneBook :: Name -> PhoneNumber -> PhoneBook -> Bool
 inPhoneBook name pnumber pbook = (name, pnumber) `elem` pbook
+
+
+--
+-- Lockers (uses Data.Map as Map)
+--
+
+-- LockerState data type to represent whether a locker is taken or free
+data LockerState = Taken | Free
+    deriving (Show, Eq)
+
+-- Code type synonym to represent the locker code
+type Code = String
+
+-- LockerMap type synonym to represent the locker's number as a pair of LockerState and Code
+type LockerMap = Map.Map Int (LockerState, Code)
+
+
+-- Example of using Either a b data type
+--  . errors use the Left value constructor
+--  . results use the Right value constructor
+-- We could have used Maybe a, but then we wouldn't know why we couldn't get the code
+lockerLookup :: Int -> LockerMap -> Either String Code
+lockerLookup lockerNumber lockerMap = case Map.lookup lockerNumber lockerMap of
+    Nothing -> Left $ "Locker " ++ show lockerNumber ++ " doesn't exist!"
+    Just (state, code) -> if state /= Taken
+                            then Right code
+                            else Left $ "Locker " ++ show lockerNumber ++ " is already taken!"
+
+lockers :: LockerMap
+lockers = Map.fromList
+    [(100,(Taken, "ZD39I"))
+    ,(101,(Free, "JAH3I"))
+    ,(103,(Free, "IQSA9"))
+    ,(105,(Free, "QOTSA"))
+    ,(109,(Taken, "893JJ"))
+    ,(110,(Taken, "99292"))
+    ]
+-- lockerLookup 100 lockers --> Left "Locker 100 is already taken!"
+-- lockerLookup 101 lockers --> Right "JAH3I"
+-- lockerLookup 102 lockers --> Left "Locker 102 doesn't exist!"
 
