@@ -192,3 +192,48 @@ Empty'' ^++ ys = ys
 -- (3 :-: 4 :-: 5 :-: Empty'') ^++ (6 :-: 7 :-: Empty'')
 --  --> 3 :-: (4 :-: (5 :-: (6 :-: (7 :-: Empty''))))
 
+
+--
+-- A binary search tree
+--
+
+data Tree a = EmptyTree | Node a (Tree a) (Tree a)
+    deriving (Show)
+
+-- a Tree with just 1 node
+singleton :: a -> Tree a
+singleton x = Node x EmptyTree EmptyTree
+
+-- insert an element into a Tree
+treeInsert :: (Ord a) => a -> Tree a -> Tree a
+treeInsert x EmptyTree = singleton x
+treeInsert x (Node a left right)
+    | x == a = Node x left right
+    | x < a  = Node a (treeInsert x left) right
+    | x > a  = Node a left (treeInsert x right)
+
+-- check if an element is already in a Tree
+treeElem :: (Ord a) => a -> Tree a -> Bool
+treeElem x EmptyTree = False
+treeElem x (Node a left right)
+    | x == a = True
+    | x < a  = treeElem x left
+    | x > a  = treeElem x right
+
+-- build a Tree using a foldr
+numsTree :: Tree Integer
+numsTree = foldr treeInsert EmptyTree [8,6,4,1,7,3,5]
+-- Node 5
+--      (Node 3
+--          (Node 1 EmptyTree EmptyTree)
+--          (Node 4 EmptyTree EmptyTree)
+--      )
+--      (Node 7
+--          (Node 6 EmptyTree EmptyTree)
+--          (Node 8 EmptyTree EmptyTree)
+--      )
+
+
+-- 8 `treeElem` numsTree --> True
+-- 9 `treeElem` numsTree --> False
+
