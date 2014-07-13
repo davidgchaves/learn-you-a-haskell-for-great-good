@@ -166,3 +166,29 @@ lockers = Map.fromList
 -- lockerLookup 101 lockers --> Right "JAH3I"
 -- lockerLookup 102 lockers --> Left "Locker 102 doesn't exist!"
 
+
+--
+-- Our own List
+--
+
+-- using Cons
+data List a = Empty | Cons a (List a)
+    deriving (Show, Read, Eq, Ord)
+
+-- using Cons with Record Syntax
+data List' a = Empty' | Cons' { listHead :: a, listTail :: List' a }
+    deriving (Show, Read, Eq, Ord)
+
+-- using the 'fixity declaration' infixr
+infixr 5 :-:
+data List'' a = Empty'' | a :-: (List'' a)
+    deriving (Show, Read, Eq, Ord)
+-- 3 :-: 4 :-: 5 :-: Empty'' --> 3 :-: (4 :-: (5 :-: Empty''))
+
+infixr 5 ^++
+(^++) :: List'' a -> List'' a -> List'' a
+Empty'' ^++ ys = ys
+(x :-: xs) ^++ ys = x :-: (xs ^++ ys)
+-- (3 :-: 4 :-: 5 :-: Empty'') ^++ (6 :-: 7 :-: Empty'')
+--  --> 3 :-: (4 :-: (5 :-: (6 :-: (7 :-: Empty''))))
+
