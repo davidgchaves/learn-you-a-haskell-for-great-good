@@ -237,3 +237,17 @@ numsTree = foldr treeInsert EmptyTree [8,6,4,1,7,3,5]
 -- 8 `treeElem` numsTree --> True
 -- 9 `treeElem` numsTree --> False
 
+
+--
+-- Anatomy of a Type Class definition
+--
+
+-- a new Type Class called Eq' is being defined
+class Eq' a where
+    -- functions: type declarations
+    (===) :: a -> a -> Bool
+    (/==) :: a -> a -> Bool
+    -- functions: bodies (not mandatory)
+    x === y = not (x /== y)
+    x /== y = not (x === y)
+
