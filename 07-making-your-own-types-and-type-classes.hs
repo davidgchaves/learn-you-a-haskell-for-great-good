@@ -251,3 +251,30 @@ class Eq' a where
     x === y = not (x /== y)
     x /== y = not (x === y)
 
+
+--
+-- The TrafficLight Data Type
+--
+
+-- TrafficLight is a Data Type, not a Type Class
+data TrafficLight = Red | Yellow | Green
+
+-- using instance for making the type instance TrafficLight of type class Eq'
+-- (and some clever pattern matching)
+instance Eq' TrafficLight where
+    Red === Red       = True
+    Yellow === Yellow = True
+    Green === Green   = True
+    _ === _           = False
+
+-- using instance for making the type instance TrafficLight of type class Show
+-- (and again, some pattern machine to achieve that)
+instance Show TrafficLight where
+    show Red    = "Red light"
+    show Yellow = "Yellow light"
+    show Green  = "Green light"
+
+-- Red === Red          --> True
+-- Red === Green        --> False
+-- [Red, Yellow, Green] --> [Red light, Yellow light, Green light]
+
