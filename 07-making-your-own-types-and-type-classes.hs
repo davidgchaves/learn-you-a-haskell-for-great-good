@@ -318,3 +318,17 @@ instance YesNo TrafficLight where
     yesno _   = True
 -- yesno Yellow --> True
 
+
+--
+-- An If statement (mimicking the js 'if' statement)
+--
+
+yesnoIf :: (YesNo y) => y -> a -> a -> a
+yesnoIf yesnoVal yesResult noResult =
+    if yesno yesnoVal then yesResult else noResult
+-- yesnoIf [] "YEAH!" "NO!"         --> "NO!"
+-- yesnoIf [2,3,4] "YEAH!" "NO!"    --> "YEAH!"
+-- yesnoIf True "YEAH!" "NO!"       --> "YEAH!"
+-- yesnoIf (Just 500) "YEAH!" "NO!" --> "YEAH!"
+-- yesnoIf Nothing "YEAH!" "NO!"    --> "NO!"
+
