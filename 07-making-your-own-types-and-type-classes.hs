@@ -278,3 +278,43 @@ instance Show TrafficLight where
 -- Red === Green        --> False
 -- [Red, Yellow, Green] --> [Red light, Yellow light, Green light]
 
+
+--
+-- A Yes-No Type Class (mimicking the js-like 'truthy/falsy' behaviour)
+--
+
+class YesNo a where
+    yesno :: a -> Bool
+-- :type yesno --> yesno :: YesNo a => a -> Bool
+
+instance YesNo Int where
+    yesno 0 = False
+    yesno _ = True
+-- yesno $ length [] --> False
+
+instance YesNo [a] where
+    yesno [] = False
+    yesno _  = True
+-- yesno ""      --> False
+-- yesno "Boo"   --> True
+-- yesno [0,0,0] --> True
+
+instance YesNo Bool where
+    yesno = id
+-- yesno True --> True
+
+instance YesNo (Maybe a) where
+    yesno Nothing  = False
+    yesno (Just _) = True
+-- yesno $ Just 0 --> True
+
+instance YesNo (Tree a) where
+    yesno EmptyTree = False
+    yesno _         = True
+-- yesno EmptyTree --> False
+
+instance YesNo TrafficLight where
+    yesno Red = False
+    yesno _   = True
+-- yesno Yellow --> True
+
