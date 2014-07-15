@@ -332,3 +332,11 @@ yesnoIf yesnoVal yesResult noResult =
 -- yesnoIf (Just 500) "YEAH!" "NO!" --> "YEAH!"
 -- yesnoIf Nothing "YEAH!" "NO!"    --> "NO!"
 
+
+--
+-- Functors!!!
+--
+
+class Functor' f where
+    fmap' :: (a -> b) -> f a -> f b
+
