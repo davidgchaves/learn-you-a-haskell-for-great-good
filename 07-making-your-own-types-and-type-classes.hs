@@ -355,3 +355,21 @@ instance Functor' [] where
 -- fmap' (*2) []      --> []
 -- fmap' (*2) [1,3,5] --> [2,6,10
 
+
+--
+-- The 'Maybe a' type is part of the Functor type class
+--
+
+-- fmap' :: (a -> b) -> f a     -> f b
+-- fmap' :: (a -> b) -> Maybe a -> Maybe b
+instance Functor' Maybe where
+    fmap' f Nothing  = Nothing
+    fmap' f (Just x) = Just (f x)
+-- fmap (*2) Nothing    --> Nothing
+-- fmap (*2) (Just 100) --> Just 200
+
+-- fmap (++ " INSIDE THE JUST!") Nothing
+--      --> Nothing
+-- fmap (++ " INSIDE THE JUST!") (Just "Something serious.")
+--      --> Just "Something serious. INSIDE THE JUST!"
+
