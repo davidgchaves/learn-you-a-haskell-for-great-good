@@ -373,3 +373,23 @@ instance Functor' Maybe where
 -- fmap (++ " INSIDE THE JUST!") (Just "Something serious.")
 --      --> Just "Something serious. INSIDE THE JUST!"
 
+
+--
+-- The 'Tree a' type is part of the Functor type class
+--
+
+instance Functor' Tree where
+    fmap' f EmptyTree           = EmptyTree
+    fmap' f (Node x left right) = Node (f x) (fmap' f left) (fmap' f right)
+-- fmap' (*2) EmptyTree --> EmptyTree
+-- fmap' (*4) (foldr treeInsert EmptyTree [8,6,4,1,7,3,5]) -->
+--      Node 20
+--          (Node 12
+--              (Node 4 EmptyTree EmptyTree)
+--              (Node 16 EmptyTree EmptyTree)
+--          )
+--          (Node 28
+--              (Node 24 EmptyTree EmptyTree)
+--              (Node 32 EmptyTree EmptyTree)
+--          )
+
