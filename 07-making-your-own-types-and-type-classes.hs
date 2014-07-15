@@ -340,3 +340,18 @@ yesnoIf yesnoVal yesResult noResult =
 class Functor' f where
     fmap' :: (a -> b) -> f a -> f b
 
+
+--
+-- The List type is part of the Functor type class:
+--      [] is a type constructor that
+--          - takes one type
+--          - produces types such as [Int], [String], ...
+--
+
+-- fmap' :: (a -> b) -> f a -> f b
+-- map'  :: (a -> b) -> [a] -> [b]
+instance Functor' [] where
+    fmap' = map
+-- fmap' (*2) []      --> []
+-- fmap' (*2) [1,3,5] --> [2,6,10
+
