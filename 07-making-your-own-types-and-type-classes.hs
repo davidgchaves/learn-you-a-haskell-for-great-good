@@ -393,3 +393,16 @@ instance Functor' Tree where
 --              (Node 32 EmptyTree EmptyTree)
 --          )
 
+
+--
+-- The 'Either a b' type is part of the Functor type class
+--
+
+-- fmap' :: (a -> b) -> f a          -> f b
+-- fmap' :: (b -> c) -> (Either a) b -> (Either a) c
+instance Functor' (Either a) where
+    fmap' f (Right x) = Right (f x)
+    fmap' f (Left x)  = Left x
+-- fmap' (*2) (Left "Error") --> Left "Error"
+-- fmap' (*2) (Right 4)      --> Right 8
+
