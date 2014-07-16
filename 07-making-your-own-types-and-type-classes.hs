@@ -406,3 +406,54 @@ instance Functor' (Either a) where
 -- fmap' (*2) (Left "Error") --> Left "Error"
 -- fmap' (*2) (Right 4)      --> Right 8
 
+
+--
+-- The Tofu type class (or how Kinds work in Haskell)
+--
+
+class Tofu t where
+    tofu :: j a -> t a j
+
+-- 'j a' is used as the type of a value that the 'tofu' function takes as its parameter,
+--      so 'j a' has to have a kind of '*'
+-- Assume '*' for 'a', so 'j' has to have a kind of '* -> *'
+--
+-- So far:
+--  - 'a' has a kind of '*'
+--  - 'j' has a kind of '* -> *'
+--
+-- 't' takes two types ('a' and 'j') and
+--     produces a concrete value
+-- so 't' has to have a kind of '* -> (* -> *) -> *)
+--                               a    j           concrete type that produces
+--
+-- So far:
+--  - 'a' has a kind of '*'
+--  - 'j' has a kind of '* -> *'
+--  - 't' has a kind of '* -> (* -> *) -> *'
+
+
+-- This is how Frank (a type with a kind of '* -> (* -> *) -> *') looks like
+data Frank a b = Frank { frankField :: b a }
+    deriving (Show)
+-- What do we've got here?
+--      - Abstract Data Types (like Frank) are made to hold values, so they must be of kind '*'
+--      - Assume 'a' has a kind of '*'
+--      - So 'b' must have a kind of '* -> *'
+
+-- :t Frank { frankField = Just "HaHa" } --> Frank { frankField = Just "HaHa" } :: Frank [Char] Maybe
+--      - [Char] has a type of '*'          "HaHa" in the Example       -> a
+--      - Maybe  has a type of '* -> *'     Just in the example         -> b
+--      - Maybe [Char]                      Just "HaHa" in the example  -> b a
+
+
+-- Making Frank an instance of Tofu
+instance Tofu Frank where
+    tofu x = Frank x
+-- remember that tofu :: j a -> t a j
+-- 'j a'   in this case will be 'Maybe Int'
+-- 't a j' in this case will be 'Frank Int Maybe'
+
+-- tofu (Just 'a') :: Frank Char Maybe --> Frank {frankField = Just 'a'}
+-- tofu ["HELLO"]  :: Frank [Char] []  --> Frank {frankField = ["HELLO"]}
+
