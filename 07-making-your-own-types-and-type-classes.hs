@@ -457,3 +457,30 @@ instance Tofu Frank where
 -- tofu (Just 'a') :: Frank Char Maybe --> Frank {frankField = Just 'a'}
 -- tofu ["HELLO"]  :: Frank [Char] []  --> Frank {frankField = ["HELLO"]}
 
+
+--
+-- Making Barry an instance of Functor
+--
+
+-- meet Barry
+data Barry t k p = Barry { yabba :: p, dabba :: t k }
+-- What's the kind of Barry?
+--      - 'p' is a concrete type so it has a kind of '*'
+--      - assume 'k' has a kind of '*'
+--      - so 't' has a kind of '* -> *'
+-- So 'Barry t k p' must have a kind of:
+-- '(* -> *) -> * -> * -> *
+--
+-- ... and it's true:
+-- :kind Barry --> Barry :: (* -> *) -> * -> * -> *
+
+
+-- Functor wants types of kind * -> *
+-- so we need to partially apply Barry to its first two type parameters 't k'
+instance Functor' (Barry a b) where
+    fmap' f (Barry { yabba = x, dabba = y }) = Barry { yabba = f x, dabba = y }
+-- remember that:
+--      fmap' :: (a -> b) -> f a         -> f b
+-- so the Barry version should be (replacing 'f' with 'Barry c d'):
+--      fmap' :: (a -> b) -> Barry c d a -> Barry c d b
+
