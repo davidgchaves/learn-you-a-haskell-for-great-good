@@ -23,6 +23,8 @@ dispatch command = doesNotExist command
 add :: [String] -> IO ()
 add [filename, toDo] = appendFile filename (toDo ++ "\n")
 -- ./todo add todo.txt "Find the magic sword of power"
+add _ = putStrLn "The add command takes exactly two arguments"
+-- ./todo add todo.txt "Find the magic sword of power" "and some more"
 
 --
 -- Display current To-Do tasks
