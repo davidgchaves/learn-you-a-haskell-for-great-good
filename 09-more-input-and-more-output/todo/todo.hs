@@ -2,6 +2,7 @@ import System.Environment
 import System.Directory
 import System.IO
 import Data.List
+import Control.Exception
 
 main = do
     (command:argList) <- getArgs
@@ -13,6 +14,7 @@ main = do
 dispatch :: String -> [String] -> IO ()
 dispatch "add" = add
 dispatch "view" = view
+dispatch "remove" = remove
 
 --
 -- Add a To-Do task
@@ -33,4 +35,25 @@ view [filename] = do
                                 toDoTasks
     putStr $ unlines numberedTasks
 -- ./todo view todo.txt
+
+--
+-- Remove a To-Do task
+--
+remove :: [String] -> IO ()
+remove [filename, taskNumberStr] = do
+    toDos <- readFile filename
+    let toDoTasks = lines toDos
+        taskNumberToRemove = read taskNumberStr
+        newToDos = unlines $ delete (toDoTasks !! taskNumberToRemove) toDoTasks
+
+    bracketOnError (openTempFile "." "temp")
+        (\(tempName, tempHandle) -> do
+            hClose tempHandle
+            removeFile tempName)
+        (\(tempName, tempHandle) -> do
+            hPutStr tempHandle newToDos
+            hClose tempHandle
+            removeFile filename
+            renameFile tempName filename)
+-- ./todo remove todo.txt 1
 
