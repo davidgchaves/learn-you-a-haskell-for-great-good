@@ -15,6 +15,7 @@ dispatch :: String -> [String] -> IO ()
 dispatch "add" = add
 dispatch "view" = view
 dispatch "remove" = remove
+dispatch command = doesNotExist command
 
 --
 -- Add a To-Do task
@@ -56,4 +57,11 @@ remove [filename, taskNumberStr] = do
             removeFile filename
             renameFile tempName filename)
 -- ./todo remove todo.txt 1
+
+--
+-- The command does not exist
+--
+doesNotExist :: String -> [String] -> IO ()
+doesNotExist command _ = putStrLn $ "The " ++ command ++ " command does not exist"
+-- ./todo remove-again blah blah blah
 
