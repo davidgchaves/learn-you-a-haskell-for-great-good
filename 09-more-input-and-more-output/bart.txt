@@ -1,0 +1,5 @@
+It also has functions that have the same name and behave the same as some
+functions found in System.IO, only Strings are replaced with ByteStrings. For
+instance, the readFile function in System.IO has a type of readFile ::
+FilePath -> IO String, while the readFile from the bytestring modules has a
+type of readFile :: FilePath -> IO ByteString
