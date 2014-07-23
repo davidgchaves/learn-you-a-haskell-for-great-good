@@ -1,3 +1,27 @@
+import Data.List
+
+--
+-- main:
+--      * Reads from the standard input
+--      * Makes a RoadSystem out of it
+--      * Prints out the shortest path
+--
+
+main = do
+    contents <- getContents
+    let threes     = groupsOf 3 $ arrayFor contents
+        roadSystem = map (\[a,b,c] -> Section a b c) threes
+        path       = optimalPath roadSystem
+        pathString = stringFor path
+        pathTime   = timeFor path
+
+    putStrLn $ "The best path to take is: " ++ pathString
+    putStrLn $ "Time taken: " ++ show pathTime
+-- runhaskell fromHeathrowToLondon.hs < paths.txt
+--      --> The best path to take is: BCACBBC
+--      --> Time taken: 75
+
+
 -- A section is composed of:
 --      * Road A
 --      * Road B
@@ -90,9 +114,15 @@ groupsOf n xs = take n xs : groupsOf n (drop n xs)
 
 
 --
--- helpers: timeFor
+-- helpers: timeFor, stringFor, arrayFor
 --
 
 timeFor :: Path -> Int
 timeFor path = sum (map snd path)
+
+stringFor :: Path -> String
+stringFor path = concat $ map (show . fst) path
+
+arrayFor :: String -> [Int]
+arrayFor contents = map read $ lines contents
 
