@@ -44,8 +44,8 @@ heathrowToLondonSolution = [(B,10), (C,30), (A,5), (C,20), (B,2), (B,8)]
 
 roadStep :: (Path, Path) -> Section -> (Path, Path)
 roadStep (pathA, pathB) (Section a b c) =
-    let initialTimeForPathA = sum (map snd pathA)
-        initialTimeForPathB = sum (map snd pathB)
+    let initialTimeForPathA = timeFor pathA
+        initialTimeForPathB = timeFor pathB
 
         forwardTimeToA = initialTimeForPathA + a
         crossTimeToA   = initialTimeForPathB + b + c
@@ -70,8 +70,16 @@ roadStep (pathA, pathB) (Section a b c) =
 optimalPath :: RoadSystem -> Path
 optimalPath roadSystem =
     let (bestAPath, bestBPath) = foldl roadStep ([], []) roadSystem
-    in  if sum (map snd bestAPath) <= sum (map snd bestBPath)
+    in  if timeFor bestAPath <= timeFor bestBPath
             then reverse bestAPath
             else reverse bestBPath
 -- optimalPath heathrowToLondon --> [ (B,10),(C,30),(A,5),(C,20),(B,2),(B,8),(C,0) ]
+
+
+--
+-- helpers: timeFor
+--
+
+timeFor :: Path -> Int
+timeFor path = sum (map snd path)
 
