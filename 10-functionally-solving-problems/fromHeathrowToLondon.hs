@@ -35,3 +35,16 @@ type Path = [(Label, Int)]
 -- As an example, the heathrowToLondon solution should be:
 heathrowToLondonSolution = [(B,10), (C,30), (A,5), (C,20), (B,2), (B,8)]
 
+
+--
+-- roadStep: Check the optimal paths on A and B so far and the current section
+--           to produce the new optimal paths on A and B
+--
+
+roadStep :: (Path, Path) -> Section -> (Path, Path)
+roadStep (pathA, pathB) (Section a b c) = (pathA, pathB)
+-- NOTE: THIS IS A DUMMY roadStep TO SANITY CHECK THAT TYPES ARE CORRECT
+--       IT'S NOT TRULY IMPLEMENTED!!!
+--       SOMEHOW I'M TRYING TO TDD roadStep WITHOUT TDDing :P
+-- roadStep ([(A,10), (C,15)], [(B,15)]) (Section 1 2 3) --> ([(A,10),(C,15)],[(B,15)])
+
