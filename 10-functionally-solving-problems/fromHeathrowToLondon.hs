@@ -11,3 +11,10 @@ data Section = Section { getA :: Int, getB :: Int, getC :: Int }
 -- RoadSystem is a Type Synonym represented as a list of Sections
 type RoadSystem = [Section]
 
+-- Heathrow to London represented as a RoadSystem
+heathrowToLondon :: RoadSystem
+heathrowToLondon = [ Section 50 10 30
+                   , Section  5 90 20
+                   , Section 40  2 25
+                   , Section 10  8  0]
+
