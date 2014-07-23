@@ -39,12 +39,26 @@ heathrowToLondonSolution = [(B,10), (C,30), (A,5), (C,20), (B,2), (B,8)]
 --
 -- roadStep: Check the optimal paths on A and B so far and the current section
 --           to produce the new optimal paths on A and B
+--           NOTE: THE PATHS ARE REVERSED. READ THEM FROM RIGHT LO LEFT
 --
 
 roadStep :: (Path, Path) -> Section -> (Path, Path)
-roadStep (pathA, pathB) (Section a b c) = (pathA, pathB)
--- NOTE: THIS IS A DUMMY roadStep TO SANITY CHECK THAT TYPES ARE CORRECT
---       IT'S NOT TRULY IMPLEMENTED!!!
---       SOMEHOW I'M TRYING TO TDD roadStep WITHOUT TDDing :P
--- roadStep ([(A,10), (C,15)], [(B,15)]) (Section 1 2 3) --> ([(A,10),(C,15)],[(B,15)])
+roadStep (pathA, pathB) (Section a b c) =
+    let initialTimeForPathA = sum (map snd pathA)
+        initialTimeForPathB = sum (map snd pathB)
+
+        forwardTimeToA = initialTimeForPathA + a
+        crossTimeToA   = initialTimeForPathB + b + c
+        forwardTimeToB = initialTimeForPathB + b
+        crossTimeToB   = initialTimeForPathA + a + c
+
+        newPathToA = if forwardTimeToA <= crossTimeToA
+                        then (A,a):pathA
+                        else (C,c):(B,b):pathB
+        newPathToB = if forwardTimeToB <= crossTimeToB
+                        then (B,b):pathB
+                        else (C,c):(A,a):pathA
+
+    in (newPathToA, newPathToB)
+-- roadStep ([], []) (head heathrowToLondon) --> ( [(C,30),(B,10)], [(B,10)] )
 
