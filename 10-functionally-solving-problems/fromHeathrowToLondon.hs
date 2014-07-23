@@ -18,3 +18,17 @@ heathrowToLondon = [ Section 50 10 30
                    , Section 40  2 25
                    , Section 10  8  0]
 
+-- optimalPath should have the following type:
+-- optimalPath :: RoadSystem -> Path
+--
+-- Path can be represented as a list of
+--      * Roads (A, B or C)
+--      * Durations
+--
+-- Let's introduce a Label type (a simple enumeration)
+data Label = A | B | C
+    deriving (Show)
+
+-- Path is simply a Type Synonym of Labels and Durations
+type Path = [(Label, Int)]
+
