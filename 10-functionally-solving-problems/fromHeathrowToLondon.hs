@@ -77,6 +77,19 @@ optimalPath roadSystem =
 
 
 --
+-- groupsOf: takes a list and splits it into groups of the same size
+--
+
+groupsOf :: Int -> [a] -> [[a]]
+groupsOf 0 _  = undefined
+groupsOf _ [] = []
+groupsOf n xs = take n xs : groupsOf n (drop n xs)
+-- groupsOf 0 []      --> *** Exception: Prelude.undefined
+-- groupsOf 3 []      --> []
+-- groupsOf 3 [1..10] --> [[1,2,3],[4,5,6],[7,8,9],[10]]
+
+
+--
 -- helpers: timeFor
 --
 
