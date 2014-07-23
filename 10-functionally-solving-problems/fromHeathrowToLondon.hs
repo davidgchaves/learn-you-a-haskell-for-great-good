@@ -32,3 +32,6 @@ data Label = A | B | C
 -- Path is simply a Type Synonym of Labels and Durations
 type Path = [(Label, Int)]
 
+-- As an example, the heathrowToLondon solution should be:
+heathrowToLondonSolution = [(B,10), (C,30), (A,5), (C,20), (B,2), (B,8)]
+
