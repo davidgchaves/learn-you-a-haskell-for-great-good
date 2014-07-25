@@ -35,3 +35,16 @@ instance Applicative Maybe where
 -- pure (+3) <*> Just 9          --> Just 12
 --  Try to use pure (instead of Just) in an applicative context (using <*>)
 
+
+--
+-- The Applicative instance implementation of [] (the list type constructor)
+--
+
+instance Applicative [] where
+    pure x = [x]
+    fs <*> xs = [f x | f <- fs, x <- xs]
+-- pure "Hey" :: [String]          --> ["Hey"]
+-- pure "Hey" :: Maybe String      --> Just "Hey"
+-- [(*0),(+100),(^2)] <*> [1,2,3]  --> [0,0,0, 101,102,103, 1,4,9]
+-- [(+),(*)] <*> [1,2] <*> [10,20] --> [11,21,12,22, 10,20,20,40]
+
