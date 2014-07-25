@@ -41,5 +41,7 @@ instance Functor' IO where
 instance Functor' ((->) r) where
     fmap' = (.)
 -- :t fmap' (*3) (+100)    --> fmap' (*3) (+100) :: Num a => a -> a
---    fmap' (*3) (+100) 1  --> 303
+-- fmap' (*3) (+100) 1     --> 303
+-- (*3) `fmap'` (+100) $ 1 --> 303
+-- (*3) . (+100) $ 1       --> 303
 
