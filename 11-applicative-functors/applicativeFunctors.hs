@@ -20,3 +20,18 @@ class (Functor f) => Applicative f where
 --  and extracts the function from the first functor value,
 --  and maps it over the second functor value.
 
+
+--
+-- The Applicative instance implementation of Maybe
+--
+
+instance Applicative Maybe where
+    pure = Just
+    Nothing <*> _ = Nothing
+    (Just f) <*> something = fmap f something
+-- Just (++"hahaha") <*> Nothing --> Nothing
+-- Nothing <*> Just "woot"       --> Nothing
+-- Just (+3) <*> Just 9          --> Just 12
+-- pure (+3) <*> Just 9          --> Just 12
+--  Try to use pure (instead of Just) in an applicative context (using <*>)
+
