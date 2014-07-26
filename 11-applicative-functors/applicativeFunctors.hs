@@ -25,6 +25,8 @@ class (Functor f) => Applicative f where
 -- The Applicative instance implementation of Maybe
 --
 
+-- (<*>) :: f (a -> b)     -> f a     -> f b
+-- (<*>) :: Maybe (a -> b) -> Maybe a -> Maybe b
 instance Applicative Maybe where
     pure = Just
     Nothing <*> _ = Nothing
