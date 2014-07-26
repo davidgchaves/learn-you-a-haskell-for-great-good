@@ -48,3 +48,17 @@ instance Applicative [] where
 -- [(*0),(+100),(^2)] <*> [1,2,3]  --> [0,0,0, 101,102,103, 1,4,9]
 -- [(+),(*)] <*> [1,2] <*> [10,20] --> [11,21,12,22, 10,20,20,40]
 
+
+--
+-- The Applicative instance implementation of IO
+--
+
+-- (<*>) :: f (a -> b)  -> f a  -> f b
+-- (<*>) :: IO (a -> b) -> IO a -> IO b
+instance Applicative IO where
+    pure = return
+    a <*> b = do
+        f <- a
+        x <- b
+        return (f x)
+
