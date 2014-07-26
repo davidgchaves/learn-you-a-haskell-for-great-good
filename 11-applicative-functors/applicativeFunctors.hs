@@ -40,6 +40,8 @@ instance Applicative Maybe where
 -- The Applicative instance implementation of [] (the list type constructor)
 --
 
+-- (<*>) :: f (a -> b)  -> f a  -> f b
+-- (<*>) :: [a -> b]    -> [a]  -> [b]
 instance Applicative [] where
     pure x = [x]
     fs <*> xs = [f x | f <- fs, x <- xs]
