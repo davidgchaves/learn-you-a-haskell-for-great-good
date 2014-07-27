@@ -1,3 +1,4 @@
+import qualified Control.Applicative as CtrlAppl
 --
 -- The Applicative type class as defined in the Control.Applicative module
 --
@@ -86,4 +87,13 @@ instance Applicative ((->) r) where
 --      --> (\x y z -> [x,y,z]) ((+) 3 5) ((*) 2 5) ((/) 2 5)
 --      --> (\x y z -> [x,y,z]) 8 10 0.4
 --      --> [8.0, 10.0, 0.4]
+
+
+--
+-- The Applicative instance implementation of ZipList
+--
+
+instance Applicative CtrlAppl.ZipList where
+    pure x = CtrlAppl.ZipList (repeat x)
+    CtrlAppl.ZipList fs <*> CtrlAppl.ZipList xs = CtrlAppl.ZipList (zipWith (\f x -> f x) fs xs)
 
