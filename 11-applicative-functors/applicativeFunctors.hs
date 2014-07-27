@@ -66,3 +66,24 @@ instance Applicative IO where
         x <- b
         return (f x)
 
+
+--
+-- The Applicative instance implementation of ((->) r) AKA functions
+--
+
+-- (<*>) :: f (a -> b)         -> f a         -> f b
+-- (<*>) :: ((->) r) (a -> b)  -> ((->) r) a  -> ((->) r) b
+--       :: (r -> (a -> b))    -> (r -> a)    -> (r -> b)
+instance Applicative ((->) r) where
+    pure x = \_ -> x
+    f <*> g = \x -> f x (g x)
+-- pure 3 "blah" --> 3
+-- (+) <$> (+3) <*> (*100) $ 5
+--      --> (+) ((+) 3 5) ((*) 100 5)
+--      --> (+) 8 500
+--      --> 508
+-- (\x y z -> [x,y,z]) <$> (+3) <*> (*2) <*> (/2) $ 5
+--      --> (\x y z -> [x,y,z]) ((+) 3 5) ((*) 2 5) ((/) 2 5)
+--      --> (\x y z -> [x,y,z]) 8 10 0.4
+--      --> [8.0, 10.0, 0.4]
+
