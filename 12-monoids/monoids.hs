@@ -25,3 +25,21 @@ instance Monoid [a] where
 -- 3rd Monoid Law: ([1,2,3] `mappend` [4,5,6]) `mappend` [7,8,9] --> [1,2,3,4,5,6,7,8,9]
 -- 3rd Monoid Law: [1,2,3] `mappend` ([4,5,6] `mappend` [7,8,9]) --> [1,2,3,4,5,6,7,8,9]
 
+
+--
+-- Numbers are Monoids (via Sum)
+--
+
+-- The Sum type from Data.Monoid
+newtype Sum a = Sum { getSum :: a }
+    deriving (Eq, Ord, Read, Show, Bounded)
+
+-- The Sum type is a Monoid
+instance Num a => Monoid (Sum a) where
+    mempty = Sum 0
+    Sum x `mappend` Sum y = Sum (x + y)
+-- 1st Monoid Law: getSum $ mempty `mappend` Sum 5 --> 5
+-- 2nd Monoid Law: getSum $ Sum 5 `mappend` mempty --> 5
+-- 3rd Monoid Law: getSum $ (Sum 5 `mappend` Sum 6) `mappend` Sum 10 --> 21
+-- 3rd Monoid Law: getSum $ Sum 5 `mappend` (Sum 6 `mappend` Sum 10) --> 21
+
