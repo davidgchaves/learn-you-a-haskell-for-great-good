@@ -43,3 +43,21 @@ instance Num a => Monoid (Sum a) where
 -- 3rd Monoid Law: getSum $ (Sum 5 `mappend` Sum 6) `mappend` Sum 10 --> 21
 -- 3rd Monoid Law: getSum $ Sum 5 `mappend` (Sum 6 `mappend` Sum 10) --> 21
 
+
+--
+-- Numbers are Monoids (via Product)
+--
+
+-- The Product type from Data.Monoid
+newtype Product a = Product { getProduct :: a }
+    deriving (Eq, Ord, Read, Show, Bounded)
+
+-- The Product type is a Monoid
+instance Num a => Monoid (Product a) where
+    mempty = Product 1
+    Product x `mappend` Product y = Product (x * y)
+-- 1st Monoid Law: getProduct $ mempty `mappend` Product 5 --> 5
+-- 2nd Monoid Law: getProduct $ Product 5 `mappend` mempty --> 5
+-- 3rd Monoid Law: getProduct $ (Product 5 `mappend` Product 6) `mappend` Product 10 --> 300
+-- 3rd Monoid Law: getProduct $ Product 5 `mappend` (Product 6 `mappend` Product 10) --> 300
+
