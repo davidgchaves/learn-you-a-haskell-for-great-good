@@ -79,3 +79,21 @@ instance Monoid Any where
 -- 3rd Monoid Law: getAny $ (Any True `mappend` Any True) `mappend` Any False --> True
 -- 3rd Monoid Law: getAny $ Any True `mappend` (Any True `mappend` Any False) --> True
 
+
+--
+-- Bools are Monoids (via logical and)
+--
+
+-- The All newtype constructor
+newtype All = All { getAll :: Bool }
+    deriving (Eq, Ord, Read, Show, Bounded)
+
+-- The All newtype contructor is a Monoid
+instance Monoid All where
+    mempty = All True
+    All x `mappend` All y = All (x && y)
+-- 1st Monoid Law: getAll $ mempty `mappend` All False --> False
+-- 2nd Monoid Law: getAll $ All False `mappend` mempty --> False
+-- 3rd Monoid Law: getAll $ (All True `mappend` All True) `mappend` All False --> False
+-- 3rd Monoid Law: getAll $ All True `mappend` (All True `mappend` All False) --> False
+
