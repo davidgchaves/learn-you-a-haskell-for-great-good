@@ -61,3 +61,21 @@ instance Num a => Monoid (Product a) where
 -- 3rd Monoid Law: getProduct $ (Product 5 `mappend` Product 6) `mappend` Product 10 --> 300
 -- 3rd Monoid Law: getProduct $ Product 5 `mappend` (Product 6 `mappend` Product 10) --> 300
 
+
+--
+-- Bools are Monoids (via logical or)
+--
+
+-- The Any newtype constructor
+newtype Any = Any { getAny :: Bool }
+    deriving (Eq, Ord, Read, Show, Bounded)
+
+-- The Any newtype contructor is a Monoid
+instance Monoid Any where
+    mempty = Any False
+    Any x `mappend` Any y = Any (x || y)
+-- 1st Monoid Law: getAny $ mempty `mappend` Any True --> True
+-- 2nd Monoid Law: getAny $ Any True `mappend` mempty --> True
+-- 3rd Monoid Law: getAny $ (Any True `mappend` Any True) `mappend` Any False --> True
+-- 3rd Monoid Law: getAny $ Any True `mappend` (Any True `mappend` Any False) --> True
+
