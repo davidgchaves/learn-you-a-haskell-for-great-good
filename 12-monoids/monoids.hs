@@ -112,3 +112,24 @@ instance Monoid Ordering where
 -- 3rd Monoid Law: (LT `mappend` EQ) `mappend` GT --> LT
 -- 3rd Monoid Law: LT `mappend` (EQ `mappend` GT) --> LT
 
+--
+-- How is the Ordering Monoid useful?
+-- Taking advantage of how Ordering is a Monoid implementing lengthCompare
+--
+
+-- No MONOID
+lengthCompare :: String -> String -> Ordering
+lengthCompare x y = let lengthComparison = length x `compare` length y
+                        alphaComparison = x `compare` y
+                    in  if lengthComparison == EQ then alphaComparison else lengthComparison
+-- lengthCompare "zen" "ants" --> LT
+-- lengthCompare "zen" "ant"  --> GT
+
+-- Using the fact that Ordering is a Monoid
+lengthCompare' :: String -> String -> Ordering
+lengthCompare' x y = let lengthComparison = length x `compare` length y
+                         alphaComparison = x `compare` y
+                     in  lengthComparison `mappend` alphaComparison
+-- lengthCompare' "zen" "ants" --> LT
+-- lengthCompare' "zen" "ant"  --> GT
+
