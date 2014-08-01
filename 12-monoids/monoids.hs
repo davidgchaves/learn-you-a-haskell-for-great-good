@@ -97,3 +97,18 @@ instance Monoid All where
 -- 3rd Monoid Law: getAll $ (All True `mappend` All True) `mappend` All False --> False
 -- 3rd Monoid Law: getAll $ All True `mappend` (All True `mappend` All False) --> False
 
+
+--
+-- Ordering is a Monoid
+--
+
+instance Monoid Ordering where
+    mempty = EQ
+    LT `mappend` _ = LT
+    EQ `mappend` y = y
+    GT `mappend` _ = GT
+-- 1st Monoid Law: mempty `mappend` GT --> GT
+-- 2nd Monoid Law: GT `mappend` mempty --> GT
+-- 3rd Monoid Law: (LT `mappend` EQ) `mappend` GT --> LT
+-- 3rd Monoid Law: LT `mappend` (EQ `mappend` GT) --> LT
+
