@@ -133,3 +133,21 @@ lengthCompare' x y = let lengthComparison = length x `compare` length y
 -- lengthCompare' "zen" "ants" --> LT
 -- lengthCompare' "zen" "ant"  --> GT
 
+
+--
+-- Maybe a as Monoid only if its type parameter a is a Monoid as well
+-- USEFULNESS: When dealing with Monoids as results of computations that may have failed,
+--             (we can continue to treat them as normal Monoids)
+--
+
+instance Monoid a => Monoid (Maybe a) where
+    mempty = Nothing
+    Nothing `mappend` m = m
+    m `mappend` Nothing = m
+    Just m1 `mappend` Just m2 = Just (m1 `mappend` m2)
+
+-- 1st Monoid Law: mempty `mappend` Just (Sum 5)                                  --> Just (Sum {getSum = 5})
+-- 2nd Monoid Law: Just (Sum 5) `mappend` mempty                                  --> Just (Sum {getSum = 5})
+-- 3rd Monoid Law: (Just (Sum 5) `mappend` Just (Sum 10)) `mappend` Just (Sum 20) --> Just (Sum {getSum = 35})
+-- 3rd Monoid Law: Just (Sum 5) `mappend` (Just (Sum 10) `mappend` Just (Sum 20)) --> Just (Sum {getSum = 35})
+
