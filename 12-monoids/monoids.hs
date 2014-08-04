@@ -174,3 +174,27 @@ instance Monoid (First a) where
 
 -- Usefulness of mconcat: getFirst . mconcat . map First $ [Nothing, Just 3, Nothing, Just 7] --> Just 3
 
+
+--
+-- Maybe a is a Monoid (using Last a type)
+-- USEFULNESS: When we have a bunch of Maybe values
+--             and want to know if any of them (the rightmost) is a Just
+--
+
+-- Last: Take a Maybe a and wrap it with a newtype (from Data.Monoid)
+--        Return the rightmost non-Nothing value
+newtype Last a = Last { getLast :: Maybe a }
+    deriving (Eq, Read, Ord, Show)
+
+-- The Maybe Monoid
+instance Monoid (Last a) where
+    mempty = Last Nothing
+    _ `mappend` Last (Just x) = Last (Just x)
+    x `mappend` Last Nothing = x
+-- 1st Monoid Law: getLast $ mempty `mappend` Last (Just 'a') --> Just 'a'
+-- 2nd Monoid Law: getLast $ Last (Just 'a') `mappend` mempty --> Just 'a'
+-- 3rd Monoid Law: getLast $ (Last Nothing `mappend` Last (Just 'b')) `mappend` Last (Just 'c') --> Just 'c'
+-- 3rd Monoid Law: getLast $ Last Nothing `mappend` (Last (Just 'b') `mappend` Last (Just 'c')) --> Just 'c'
+
+-- Usefulness of mconcat: getLast . mconcat . map Last $ [Nothing, Just 3, Nothing, Just 7, Nothing] --> Just 7
+
