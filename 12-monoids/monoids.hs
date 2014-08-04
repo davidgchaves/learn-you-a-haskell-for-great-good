@@ -145,9 +145,32 @@ instance Monoid a => Monoid (Maybe a) where
     Nothing `mappend` m = m
     m `mappend` Nothing = m
     Just m1 `mappend` Just m2 = Just (m1 `mappend` m2)
-
 -- 1st Monoid Law: mempty `mappend` Just (Sum 5)                                  --> Just (Sum {getSum = 5})
 -- 2nd Monoid Law: Just (Sum 5) `mappend` mempty                                  --> Just (Sum {getSum = 5})
 -- 3rd Monoid Law: (Just (Sum 5) `mappend` Just (Sum 10)) `mappend` Just (Sum 20) --> Just (Sum {getSum = 35})
 -- 3rd Monoid Law: Just (Sum 5) `mappend` (Just (Sum 10) `mappend` Just (Sum 20)) --> Just (Sum {getSum = 35})
+
+
+--
+-- Maybe a is a Monoid (using First a type)
+-- USEFULNESS: When we have a bunch of Maybe values
+--             and want to know if any of them (the leftmost) is a Just
+--
+
+-- First: Take a Maybe a and wrap it with a newtype (from Data.Monoid)
+--        Return the leftmost non-Nothing value
+newtype First a = First { getFirst :: Maybe a }
+    deriving (Eq, Read, Ord, Show)
+
+-- The Maybe Monoid
+instance Monoid (First a) where
+    mempty = First Nothing
+    First (Just x) `mappend` _ = First (Just x)
+    First Nothing `mappend` x = x
+-- 1st Monoid Law: getFirst $ mempty `mappend` First (Just 'a') --> Just 'a'
+-- 2nd Monoid Law: getFirst $ First (Just 'a') `mappend` mempty --> Just 'a'
+-- 3rd Monoid Law: getFirst $ (First Nothing `mappend` First (Just 'b')) `mappend` First (Just 'c') --> Just 'b'
+-- 3rd Monoid Law: getFirst $ First Nothing `mappend` (First (Just 'b') `mappend` First (Just 'c')) --> Just 'b'
+
+-- Usefulness of mconcat: getFirst . mconcat . map First $ [Nothing, Just 3, Nothing, Just 7] --> Just 3
 
