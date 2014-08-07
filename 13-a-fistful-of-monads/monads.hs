@@ -19,3 +19,19 @@ class (Applicative m) => Monad' m where
     fail' :: String -> m a
     fail' msg = error msg
 
+
+--
+-- Maybe is an instance of Monad
+--
+
+instance Monad' Maybe where
+    return' x = Just x
+
+    Nothing >>>= f = Nothing
+    Just x >>>= f = f x
+
+    fail' _ = Nothing
+-- return' "WHAT" :: Maybe String     --> Just "WHAT"
+-- Just 5 >>>= (\x -> Just (x * 10))  --> Just 50
+-- Nothing >>>= (\x -> Just (x * 10)) --> Nothing
+
