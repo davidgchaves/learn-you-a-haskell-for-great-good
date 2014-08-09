@@ -70,3 +70,14 @@ landRight' n (left, right)
 -- A sequence of bird landings:
 -- return (0,0) >>= landRight' 1 >>= landLeft' 2 >>= landRight' 1 --> Just (2,2)
 
+
+--
+-- Banana on a Wire: Making Pierre slip and fall
+--
+
+-- banana will always cause our walker to fall, no matter what
+-- it ignores its input and return a predetermined monadic value (Nothing)
+banana :: Pole -> Maybe Pole
+banana _ = Nothing
+-- return (0,0) >>= landRight' 1 >>= banana >>= landLeft' 1 --> Nothing
+
