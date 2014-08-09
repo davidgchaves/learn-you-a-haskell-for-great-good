@@ -56,3 +56,17 @@ landRight' n (left, right)
 -- landRight' 3 (0,0) --> Just (0,3)
 -- landRight' 5 (0,0) --> Nothing
 
+
+--
+-- Repeatedly landing Birds on the Pole
+--  We need a way of taking a Maybe Pole and feeding it to a function
+--  that takes a Pole and returns a Maybe Pole
+--  >>= does exactly taht for Maybe
+--
+
+-- landRight' 1 (0,0) >>= landLeft' 2 >>= landRight' 1 --> Just (2,2)
+-- landRight' 1 (0,0) >>= landLeft' 5 >>= landRight' 1 --> Nothing
+
+-- A sequence of bird landings:
+-- return (0,0) >>= landRight' 1 >>= landLeft' 2 >>= landRight' 1 --> Just (2,2)
+
