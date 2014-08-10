@@ -81,3 +81,25 @@ banana :: Pole -> Maybe Pole
 banana _ = Nothing
 -- return (0,0) >>= landRight' 1 >>= banana >>= landLeft' 1 --> Nothing
 
+
+--
+-- Using the 'do notation'
+--
+
+routine1 :: Maybe Pole
+routine1 = do
+    start  <- return (0,0)
+    first  <- landLeft' 2 start
+    second <- landRight' 2 first
+    landLeft' 1 second
+-- routine1 --> Just (3,2)
+
+routine2 :: Maybe Pole
+routine2 = do
+    start  <- return (0,0)
+    first  <- landLeft' 2 start
+    Nothing
+    second <- landRight' 2 first
+    landLeft' 1 second
+-- routine2 --> Nothing
+
