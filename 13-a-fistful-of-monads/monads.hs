@@ -35,3 +35,18 @@ instance Monad' Maybe where
 -- Just 5 >>>= (\x -> Just (x * 10))  --> Just 50
 -- Nothing >>>= (\x -> Just (x * 10)) --> Nothing
 
+
+--
+-- A Monad instance for lists
+--
+
+instance Monad' [] where
+    return' x = [x]
+
+    xs >>>= f = concat (map f xs)
+
+    fail' _ = []
+-- return' 4 :: [Int]                          --> [4]
+-- [3,4,5] >>>= \x -> [x,-x]                   --> [3,-3, 4,-4, 5,-5]
+-- [] >>>= \x -> ["failing", "like", "a boss"] --> []
+
