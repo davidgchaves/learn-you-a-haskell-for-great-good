@@ -62,3 +62,12 @@ class (Monad' m) => MonadPlus' m where
     -- mplus is synonymous with mappend
     mplus' :: m a -> m a -> m a
 
+
+--
+-- Lists are MonadPlus (monoids as well as monads)
+--
+
+instance MonadPlus' [] where
+    mzero' = []
+    mplus' = (++)
+
