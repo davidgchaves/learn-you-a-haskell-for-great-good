@@ -50,3 +50,15 @@ instance Monad' [] where
 -- [3,4,5] >>>= \x -> [x,-x]                   --> [3,-3, 4,-4, 5,-5]
 -- [] >>>= \x -> ["failing", "like", "a boss"] --> []
 
+
+--
+-- MonadPlus: Monads that can also act as Monoids
+--
+
+class (Monad' m) => MonadPlus' m where
+    -- mzero is synonymous with mempty
+    mzero' :: m a
+
+    -- mplus is synonymous with mappend
+    mplus' :: m a -> m a -> m a
+
