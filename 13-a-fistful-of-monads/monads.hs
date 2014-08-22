@@ -71,3 +71,25 @@ instance MonadPlus' [] where
     mzero' = []
     mplus' = (++)
 
+
+--
+-- MonadPlus and Guards in List Comprehensions
+--  NOTE: Remember that () is the Empty Tuple or Unit
+--
+
+guard :: (MonadPlus' m) => Bool -> m ()
+guard True = return' ()
+guard False = mzero'
+-- If True return the Empty Tuple () inside a List []
+-- guard (5 > 3) :: [()] --> [()]
+--
+-- If False, no result at all. Failed computation (2 is not > 3)
+-- guard (2 > 3) :: [()] --> []
+
+-- In conjuction with >>
+-- If guard True, allow the computations to continue
+-- guard (5 > 3) >>> return "cool" :: [String] --> ["cool"]
+--
+-- If guard False, produce a failure (don't allow the computations to continue)
+-- guard (2 > 3) >>> return "cool" :: [String] --> []
+
