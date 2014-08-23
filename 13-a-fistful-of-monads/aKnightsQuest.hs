@@ -53,3 +53,7 @@ in3 start = do
     second <- moveKnight first
     moveKnight second
 
+-- Using '>>='
+in3' :: KnightPos -> [KnightPos]
+in3' start = return start >>= moveKnight >>= moveKnight >>= moveKnight
+
