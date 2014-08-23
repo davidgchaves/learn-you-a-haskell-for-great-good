@@ -41,3 +41,15 @@ moveKnight' (c,r) = filter onBoard
 -- moveKnight' (6,2) --> [(8,1),(8,3),(4,1),(4,3),(7,4),(5,4)]
 -- moveKnight' (8,1) --> [(6,2),(7,3)]
 
+
+--
+-- in3: Produces all the positions you can reach in 3 moves, given an initial position
+--
+
+-- Using 'do notation'
+in3 :: KnightPos -> [KnightPos]
+in3 start = do
+    first <- moveKnight start
+    second <- moveKnight first
+    moveKnight second
+
