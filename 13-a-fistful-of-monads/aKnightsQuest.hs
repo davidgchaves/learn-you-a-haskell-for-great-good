@@ -31,3 +31,13 @@ moveKnight (c,r) = do
 -- moveKnight (6,2) --> [(8,1),(8,3),(4,1),(4,3),(7,4),(5,4)]
 -- moveKnight (8,1) --> [(6,2),(7,3)]
 
+-- Using filter instead of lists as monads
+moveKnight' :: KnightPos -> [KnightPos]
+moveKnight' (c,r) = filter onBoard
+    [ (c+2,r-1), (c+2,r+1), (c-2,r-1), (c-2,r+1)
+    , (c+1,r-2), (c+1,r+2), (c-1,r-2), (c-1,r+2)
+    ]
+    where onBoard (c,r) = c `elem` [1..8] && r `elem` [1..8]
+-- moveKnight' (6,2) --> [(8,1),(8,3),(4,1),(4,3),(7,4),(5,4)]
+-- moveKnight' (8,1) --> [(6,2),(7,3)]
+
