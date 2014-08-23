@@ -57,3 +57,13 @@ in3 start = do
 in3' :: KnightPos -> [KnightPos]
 in3' start = return start >>= moveKnight >>= moveKnight >>= moveKnight
 
+
+--
+-- canReachIn3: Given an initial and final position, evaluates if you can get there in 3 moves
+--
+
+canReachIn3 :: KnightPos -> KnightPos -> Bool
+canReachIn3 start end = end `elem` in3 start
+-- (6,2) `canReachIn3` (6,1) --> True
+-- (6,2) `canReachIn3` (7,3) --> False
+
