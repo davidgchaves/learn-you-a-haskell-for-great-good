@@ -18,3 +18,19 @@
 -- return "WoW" >>= (\x -> [x,x,x]) --> ["WoW","WoW","WoW"]
 -- (\x -> [x,x,x]) "WoW"            --> ["WoW","WoW","WoW"]
 
+
+--
+-- 2nd Monad Law: RIGHT IDENTITY
+--
+
+-- When we feed the monadic value 'm' to the function 'return',
+-- the result is the monadic value 'm'
+
+-- 'm >>= return' is the same as 'm'
+
+-- For the Maybe Monad it means that 'return' doesn't introduce any failure
+-- Just "move on up" >>= (\x -> return x) --> Just "move on up"
+
+-- For the List Monad it means that 'return' doesn't introduce any extra nondeterminism
+-- [1,2,3,4] >>= (\x -> return x) --> [1,2,3,4]
+
