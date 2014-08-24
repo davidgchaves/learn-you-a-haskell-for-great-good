@@ -34,3 +34,11 @@
 -- For the List Monad it means that 'return' doesn't introduce any extra nondeterminism
 -- [1,2,3,4] >>= (\x -> return x) --> [1,2,3,4]
 
+
+--
+-- 1st and 2nd Monad Laws: It's all about how 'return' should behave
+--
+
+-- 'return' makes normal values into monadic ones and
+-- the produced monadic value shouldn't have any more than the minimal context needed
+
