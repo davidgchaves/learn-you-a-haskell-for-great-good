@@ -54,3 +54,34 @@
 
 -- '(m >>= f) >>= g' is the same as 'm >>= (\x -> f x >>= g)'
 
+
+--
+-- EXAMPLE: Monadic Function Composition
+--
+
+-- Function composition:
+-- (.) :: (b -> c) -> (a -> b) -> (a -> c)
+-- f . g = (\x -> f (g x))
+
+-- Monadic function compostion:
+(<=<) :: (Monad m) => (b -> m c) -> (a -> m b) -> (a -> m c)
+f <=< g = (\x -> g x >>= f)
+
+-- let f1 x = [-x,x]
+-- let f2 x = [x*2, x*3]
+-- let f3 x = [x+4, x-1]
+--
+-- 1st Monad Law: Left Identity
+-- (f1 <=< return) 4 --> [-4,4]
+-- f1 4              --> [-4,4]
+--
+-- 2nd Monad Law: Right Identity
+-- (return <=< f1) 4 --> [-4,4]
+-- f1 4              --> [-4,4]
+--
+-- 3rd Monad Law: For Monads, the nesting of operations (fcomp1 and fcomp2) shouldn't matter
+-- let fcomp1 = (f1 <=< f2) <=< f3
+-- let fcomp2 = f1 <=< (f2 <=< f3)
+-- fcomp1 3 --> [-14,14,-21,21,-4,4,-6,6]
+-- fcomp2 3 --> [-14,14,-21,21,-4,4,-6,6]
+
