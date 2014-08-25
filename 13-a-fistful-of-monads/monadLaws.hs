@@ -42,3 +42,15 @@
 -- 'return' makes normal values into monadic ones and
 -- the produced monadic value shouldn't have any more than the minimal context needed
 
+
+--
+-- 3rd Monad Law: ASSOCIATIVITY
+--
+
+-- It doesn't matter how you nest feeding values to monadic function:
+--  feeding the monadic value 'm' to the monadic function 'f' and then to the monadic function 'g'
+--  is the same as
+--  feeding the monadic value 'm' to a function that feeds the result of 'f x' to 'g'
+
+-- '(m >>= f) >>= g' is the same as 'm >>= (\x -> f x >>= g)'
+
