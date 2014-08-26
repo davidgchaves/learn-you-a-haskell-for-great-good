@@ -7,8 +7,13 @@
 
 
 --
--- isBigGang: takes a number of bandits in a gang and tells us if that's a big gang
+-- isBigGang: takes a number of bandits in a gang and tells us
+--            if that's a big gang and a description
 --
-isBigGang :: Int -> Bool
-isBigGang x = x > 9
+isBigGang :: Int -> (Bool, String)
+isBigGang x = (x > 9, "Compared gang size to 9.")
+-- isBigGang 5  --> (False, "Compared gang size to 9.")
+-- isBigGang 10 --> (True, "Compared gang size to 9.")
+--
+-- We have a value (True or False) and some context (a description)
 
