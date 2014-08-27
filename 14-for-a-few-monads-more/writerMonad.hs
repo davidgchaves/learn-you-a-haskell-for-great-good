@@ -1,3 +1,5 @@
+import Data.Monoid
+
 --
 -- The Writer Monad
 --
@@ -20,11 +22,11 @@ isBigGang x = (x > 9, "Compared gang size to 9.")
 
 
 --
--- applyLog
+-- applyLog: to a value and an accompanying monoid value
 --
 
-applyLog :: (a, [c]) -> (a -> (b, [c])) -> (b, [c])
-applyLog (x, log) f = let (y, newLog) = f x in (y, log ++ newLog)
+applyLog :: (Monoid m) => (a, m) -> (a -> (b, m)) -> (b, m)
+applyLog (x, log) f = let (y, newLog) = f x in (y, log `mappend` newLog)
 -- (3, "Smallish gang.") `applyLog` isBigGang       --> (False, "Smallish gang.Compared gang size to 9.")
 -- (30, "A freaking platoon.") `applyLog` isBigGang --> (True, "A freaking platoon.Compared gang size to 9.")
 -- ("Tobin", "Got outlaw name.") `applyLog` (\x -> (length x, "Applied length."))
