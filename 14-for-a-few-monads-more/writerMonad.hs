@@ -32,3 +32,20 @@ applyLog (x, log) f = let (y, newLog) = f x in (y, log `mappend` newLog)
 -- ("Tobin", "Got outlaw name.") `applyLog` (\x -> (length x, "Applied length."))
 --      --> (5, "Got outlaw name.Applied length.")
 
+
+--
+-- addDrink: Adds drink to some cowboy food order
+--
+
+type Food = String
+type Price = Sum Int
+
+addDrink :: Food -> (Food, Price)
+addDrink "beans" = ("milk", Sum 25)
+addDrink "jerky" = ("whiskey", Sum 99)
+addDrink _ = ("beer", Sum 30)
+-- ("beans", Sum 10) `applyLog` addDrink                      --> ("milk", Sum {getSum = 35})
+-- ("jerky", Sum 25) `applyLog` addDrink                      --> ("whiskey", Sum {getSum = 124})
+-- ("dogmeat", Sum 5) `applyLog` addDrink                     --> ("beer", Sum {getSum = 35})
+-- ("dogmeat", Sum 5) `applyLog` addDrink `applyLog` addDrink --> ("beer", Sum {getSum = 65})
+
