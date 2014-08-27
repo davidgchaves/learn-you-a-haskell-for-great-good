@@ -23,7 +23,7 @@ isBigGang x = (x > 9, "Compared gang size to 9.")
 -- applyLog
 --
 
-applyLog :: (a, String) -> (a -> (b, String)) -> (b, String)
+applyLog :: (a, [c]) -> (a -> (b, [c])) -> (b, [c])
 applyLog (x, log) f = let (y, newLog) = f x in (y, log ++ newLog)
 -- (3, "Smallish gang.") `applyLog` isBigGang       --> (False, "Smallish gang.Compared gang size to 9.")
 -- (30, "A freaking platoon.") `applyLog` isBigGang --> (True, "A freaking platoon.Compared gang size to 9.")
