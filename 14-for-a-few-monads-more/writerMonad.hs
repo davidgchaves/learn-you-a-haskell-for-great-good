@@ -57,3 +57,14 @@ addDrink _ = ("beer", Sum 30)
 --  w: the type of the attached Monoid value
 newtype Writer' w a = Writer' { runWriter' :: (a,w) }
 
+
+--
+-- The Writer Monad instance from Control.Monad.Writer
+--
+instance (Monoid w) => Monad (Writer' w) where
+    return x                = Writer' (x, mempty)
+    (Writer' (x,v)) >>= f   = let (Writer' (y,v')) = f x in Writer' (y, v `mappend` v')
+-- runWriter' (return 3 :: Writer' String Int)          --> (3, "")
+-- runWriter' (return 3 :: Writer' (Sum Int) Int)       --> (3, Sum {getSum = 0})
+-- runWriter' (return 3 :: Writer' (Product Int) Int)   --> (3, Product {getProduct = 1})
+
