@@ -49,3 +49,11 @@ addDrink _ = ("beer", Sum 30)
 -- ("dogmeat", Sum 5) `applyLog` addDrink                     --> ("beer", Sum {getSum = 35})
 -- ("dogmeat", Sum 5) `applyLog` addDrink `applyLog` addDrink --> ("beer", Sum {getSum = 65})
 
+
+--
+-- The Writer Type from Control.Monad.Writer
+--  wrapped in a newtype so that it can be made an instance of Monad (separate type from a normal tuple)
+--  a: the type of the value
+--  w: the type of the attached Monoid value
+newtype Writer' w a = Writer' { runWriter' :: (a,w) }
+
