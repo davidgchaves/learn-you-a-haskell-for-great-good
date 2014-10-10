@@ -87,3 +87,13 @@ stackyStack = do
 -- runState stackyStack [9,0,2] --> ((), [8,8,8])
 -- runState stackyStack [1,2,3] --> ((), [5,5,5])
 
+--
+-- pop in terms of 'get' and 'put'
+--
+pop'' :: State Stack Int
+pop'' = do
+    (x:xs) <- get
+    put xs
+    return x
+-- runState pop'' [1,2,3,4,5] --> (1, [2,3,4,5])
+
