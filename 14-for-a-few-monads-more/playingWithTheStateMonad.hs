@@ -62,3 +62,15 @@ stackStuff = do
 -- runState stackStuff [9,0,2,1,0] --> ((), [8,3,0,2,1,0])
 -- runState stackStuff [5,0,2,1,0] --> ((), [5,0,2,1,0])
 
+--
+-- moreStack: Gluing stackManip' and stackStuff together
+--
+moreStack :: State Stack ()
+moreStack = do
+    a <- stackManip'
+    if a == 100
+        then stackStuff
+        else return ()
+-- runState moreStack [9,  0,2,1,0] --> ((), [0,2,1,0])
+-- runState moreStack [100,0,2,1,0] --> ((), [8,3,2,1,0])
+
