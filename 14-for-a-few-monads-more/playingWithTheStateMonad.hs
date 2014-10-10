@@ -35,3 +35,13 @@ pop' = state $ \(x:xs) -> (x, xs)
 push' :: Int -> State Stack ()
 push' a = state $ \xs -> ((), a:xs)
 
+--
+-- stackManip': Simplifying stackManip thanks to the State Monad
+--
+stackManip' :: State Stack Int
+stackManip' = do
+    push' 3
+    pop'
+    pop'
+-- runState stackManip' [5,8,2,1] --> (5, [8,2,1])
+
