@@ -74,3 +74,16 @@ moreStack = do
 -- runState moreStack [9,  0,2,1,0] --> ((), [0,2,1,0])
 -- runState moreStack [100,0,2,1,0] --> ((), [8,3,2,1,0])
 
+
+--
+-- stackyStack: using 'get' and 'put' from the MonadState type class
+--
+stackyStack :: State Stack ()
+stackyStack = do
+    currentStack <- get
+    if currentStack == [1,2,3]
+        then put [5,5,5]
+        else put [8,8,8]
+-- runState stackyStack [9,0,2] --> ((), [8,8,8])
+-- runState stackyStack [1,2,3] --> ((), [5,5,5])
+
