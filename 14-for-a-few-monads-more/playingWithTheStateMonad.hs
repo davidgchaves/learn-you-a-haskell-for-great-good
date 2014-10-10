@@ -97,3 +97,12 @@ pop'' = do
     return x
 -- runState pop'' [1,2,3,4,5] --> (1, [2,3,4,5])
 
+--
+-- push in terms of 'get' and 'put'
+--
+push'' :: Int -> State Stack ()
+push'' x = do
+    xs <- get
+    put (x:xs)
+-- runState (push'' 0) [1,2,3,4,5] --> ((), [0,1,2,3,4,5])
+
