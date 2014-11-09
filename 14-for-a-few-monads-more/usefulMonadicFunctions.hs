@@ -10,3 +10,16 @@ liftM' f m = do
 
 -- liftM' (*3) (Just 8) --> Just 24
 
+
+--
+-- join: Takes a monadic value within a monadic value
+--       and gives us just a monadic value (it flattens it)
+--
+join' :: (Monad m) => m (m a) -> m a
+join' mm = do
+    m <- mm
+    m
+-- join' (Just (Just 9))                        --> Just 9
+-- join' [[1,2,3], [4,5,6]]                     --> [1,2,3,4,5,6]
+-- join' (Right (Right 9)) :: Either String Int --> Right 9
+
