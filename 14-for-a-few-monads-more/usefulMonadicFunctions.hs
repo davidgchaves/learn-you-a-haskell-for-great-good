@@ -59,3 +59,12 @@ lessThanFour x
 --   "10 is too large, throwing it away",
 --   "Keeping 3"]
 
+--  (2a) using the keepItAndDropIt monadic predicate...
+keepItAndDropIt :: a -> [Bool]
+keepItAndDropIt x = [True, False]
+
+--  (2b) ...to calculate a powerset of a list
+powerset :: [a] -> [[a]]
+powerset xs = filterM' keepItAndDropIt xs
+-- powerset [1,2,3] --> [[1,2,3],[1,2],[1,3],[1],[2,3],[2],[3],[]]
+
