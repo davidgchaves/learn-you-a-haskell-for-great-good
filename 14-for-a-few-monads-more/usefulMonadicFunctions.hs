@@ -23,3 +23,19 @@ join' mm = do
 -- join' [[1,2,3], [4,5,6]]                     --> [1,2,3,4,5,6]
 -- join' (Right (Right 9)) :: Either String Int --> Right 9
 
+
+--
+-- filterM: generalizes the list-based 'filter' function
+--  * Takes
+--      - a monadic predicate: returns a monadic value whose result is a Bool
+--      - a list to filter: plain old list
+--  * Returns
+--      - a monadic value: whose result is a plain old list
+--
+filterM' :: (Monad m) => (a -> m Bool) -> [a] -> m [a]
+filterM' _ []     = return []
+filterM' p (x:xs) = do
+    flag <- p x
+    ys <- filterM' p xs
+    return (if flag then x:ys else ys)
+
