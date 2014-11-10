@@ -1,3 +1,4 @@
+import Control.Monad.Writer -- for the filterM example
 --
 -- liftM: Even though every Monad is a Functor, we don't need to rely on it
 --        having a Functor instance because of the liftM function.
@@ -38,4 +39,23 @@ filterM' p (x:xs) = do
     flag <- p x
     ys <- filterM' p xs
     return (if flag then x:ys else ys)
+
+-- filterM Examples:
+--  (1) using the lessThanFour monadic predicate
+lessThanFour :: Int -> Writer [String] Bool
+lessThanFour x
+    | x < 4 = do
+        tell ["Keeping " ++ show x]
+        return True
+    | otherwise = do
+        tell [show x ++ " is too large, throwing it away"]
+        return False
+-- fst $ runWriter $ filterM' lessThanFour [9,1,5,2,10,3] --> [1,2,3]
+-- snd $ runWriter $ filterM' lessThanFour [9,1,5,2,10,3] -->
+--  ["9 is too large, throwing it away",
+--   "Keeping 1",
+--   "5 is too large, throwing it away",
+--   "Keeping 2",
+--   "10 is too large, throwing it away",
+--   "Keeping 3"]
 
